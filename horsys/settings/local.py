@@ -15,7 +15,6 @@ DATABASES = {
     }
 }
 
-# INSTALLED_APPS += (
-#     'dashboard',
-#     'profiles',
-# )
+INSTALLED_APPS += (
+    'horses',
+)

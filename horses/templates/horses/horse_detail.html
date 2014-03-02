@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{{ horse.name }}{% endblock title %}
+{% block content %}
+    <h1>Horse Detail</h1>
+    <a class="btn btn-primary" href="{% url "horse_update" horse.id %}">Edit</a>
+    <a class="btn btn-danger" href="{% url "horse_delete" horse.id %}">Delete</a>
+    <p>{{ horse.name }}</p>
+    <p>{{ horse.nickname }}</p>
+    <p>{{ horse.color }}</p>
+    <p>{{ horse.breed }}</p>
+    <p>{{ horse.height}}</p>
+{% endblock content %}

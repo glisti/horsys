@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Registered Horses{% endblock %}
+{% block content %}
+    <h1>Horse List</h1>
+    <a class="btn btn-primary" href="{% url "horse_create" %}">Create Horse</a>
+    <ul>
+    {% for horse in horse_list %}
+        <li><a href="{% url "horse_detail" horse.id %}">{{ horse.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock content %}
