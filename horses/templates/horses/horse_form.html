@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
+{% block title %}Horse Management{% endblock title %}
 {% block content %}
-    <form action="" method="post">{% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" class="btn btn-primary" value="Create" />
-    </form>
-{% endblock content %}
+    {% load crispy_forms_tags %}
+    {% crispy form %}
+{% endblock content %}x
