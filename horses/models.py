@@ -11,7 +11,7 @@ class Horse(models.Model):
     name     = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
     age      = models.IntegerField()
-    weight   = models.DecimalField(max_digits=5,decimal_places=2)
+    weight   = models.DecimalField(max_digits=6,decimal_places=2)
     feet     = models.IntegerField()
     inches   = models.IntegerField()
     color    = models.CharField(max_length=100)
