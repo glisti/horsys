@@ -9,8 +9,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'horsysdb',
-        'HOST': '/opt/bitnami/postgresql',
-        'PORT': '5432',
+        'HOST': 'localhost',
+        'PORT': '',
         'USER': 'postgres',
         'PASSWORD': 'Ir5Lmc67m2'
     }
