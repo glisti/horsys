@@ -14,7 +14,7 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('nickname', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('age', self.gf('django.db.models.fields.IntegerField')()),
-            ('weight', self.gf('django.db.models.fields.DecimalField')(max_digits=5, decimal_places=2)),
+            ('weight', self.gf('django.db.models.fields.DecimalField')(max_digits=6, decimal_places=2)),
             ('feet', self.gf('django.db.models.fields.IntegerField')()),
             ('inches', self.gf('django.db.models.fields.IntegerField')()),
             ('color', self.gf('django.db.models.fields.CharField')(max_length=255)),
@@ -39,7 +39,7 @@ class Migration(SchemaMigration):
             'inches': ('django.db.models.fields.IntegerField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'nickname': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'weight': ('django.db.models.fields.DecimalField', [], {'max_digits': '5', 'decimal_places': '2'})
+            'weight': ('django.db.models.fields.DecimalField', [], {'max_digits': '6', 'decimal_places': '2'})
         }
     }
 
