@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Log Entries{% endblock %}
+{% block content %}
+    <div class="row">
+        <h1>Daily Log</h1>
+    </div>
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{% url "log_create" %}">Create Log Entry</a>
+        </div>
+    </div>
+    {% for log in log_list %}
+        <div class="row">
+            <h3><a href="{% url "log_detail" log.id %}">{{ log.name }}</a></h3>
+        </div>
+    {% endfor %}
+    </div>
+    <div align="center">
+    <iframe src="https://www.google.com/calendar/embed?src=horsyscalendar%40gmail.com&ctz=Europe/Stockholm" style="border: 0" width="800" height="600" frameborder="0" scrolling="no" align"middle"></iframe>
+    </div>
+{% endblock content %}
