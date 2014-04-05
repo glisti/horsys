@@ -17,4 +17,5 @@ DATABASES = {
 
 INSTALLED_APPS += (
     'horses',
+    'schedule',
 )
