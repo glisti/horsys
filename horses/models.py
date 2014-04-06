@@ -25,3 +25,38 @@ class Horse(models.Model):
 
     def get_abosulte_url(self):
         return reverse('horses.views.horse_detail', args=[str(self.id)])
+
+class Placement(models.Model):
+    front_pasture = models.TextField()
+    back_pasture = models.TextField()
+    pony_pasture = models.TextField()
+    stalls = models.TextField()
+
+class Feedings(models.Model):
+	FRONT_PASTURE = 'FRONT'
+	BACK_PASTURE = 'BACK'
+	PONY_PASTURE = 'PONY'
+	STALLS = 'STALLS'
+	PLACEMENT_CHOICES= (
+		(FRONT_PASTURE, 'Front Pasture'),
+		(BACK_PASTURE, 'Back Pasture'),
+		(PONY_PASTURE, 'Pony Pasture'),
+		(STALLS, 'Stalls'),
+	)
+	horse_name = models.CharField(max_length=100)
+	location = models.CharField(max_length=6, choices=PLACEMENT_CHOICES, default=STALLS)
+	feed = models.CharField(max_length=100)
+	f_am = models.CharField(max_length=100)
+	f_pm = models.CharField(max_length=100)
+	beet_pulp = models.CharField(max_length=30)
+	rice_bran = models.CharField(max_length=30)
+	supplements = models.CharField(max_length=100)
+	hay = models.CharField(max_length=100)
+	turnout = models.CharField(max_length=100)
+	owner_name = models.CharField(max_length=100)
+	notes = models.TextField()
+
+class Blanketing(models.Model):
+	horse_name = models.CharField(max_length=100)
+	instructions = models.TextField()
+
