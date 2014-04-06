@@ -7,10 +7,17 @@ import datetime
 # Create your models here.
 
 class Log(models.Model):
-	date = models.CharField(max_length=100)
+	date = models.DateTimeField('date published')
 	desc = models.CharField(max_length=100)
 	details = models.CharField(max_length=1000)
 	auth = models.CharField(max_length=100)
+	horse = models.CharField(max_length=100)
+
+	def is_today(self):
+		return self.date >= timezone.now() - datetime.timedelta(days=1)
+
+	def is_yesterday(self):
+		return ( (self.date >= timezone.now() - datetime.timedelta(days=2)) and not (self.date >= timezone.now() - datetime.timedelta(days=1)))
 
 	def __unicode__(self):
 		return self.desc

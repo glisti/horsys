@@ -9,13 +9,25 @@
             <a class="btn btn-primary" href="{% url "log_create" %}">Create Log Entry</a>
         </div>
     </div>
+    <h2>Today's entries<h2>
     {% for log in log_list %}
+    {% if log.is_today %}
         <div class="row">
             <h3><a href="{% url "log_detail" log.id %}">{{ log.desc}}</a></h3>
         </div>
+    {% endif %}
     {% endfor %}
-    </div>
     <div align="center">
     <iframe src="https://www.google.com/calendar/embed?src=horsyscalendar%40gmail.com&ctz=Europe/Stockholm" style="border: 0" width="800" height="600" frameborder="0" scrolling="no" align"middle"></iframe>
+    </div>
+    <div>
+    <h2>Yesterday's Entries<h2>
+    {% for log in log_list %}
+    {% if log.is_yesterday %}
+        <div class="row">
+            <h3><a href="{% url "log_detail" log.id %}">{{ log.desc}}</a></h3>
+        </div>
+    {% endif %}
+    {% endfor %}
     </div>
 {% endblock content %}

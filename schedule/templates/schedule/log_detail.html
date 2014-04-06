@@ -11,9 +11,11 @@
         </div>
     </div>
     <div class="row">
-        <p>{{ log.date }}</p>
-        <p>{{ log.desc }}</p>
-        <p>{{ log.details }}</p>
-        <p>{{ log.auth }}</p>
+        <p>Date of entry: {{ log.date }}</p>
+        <p>Description: {{ log.desc }}</p>
+        <p>More details: {{ log.details }}</p>
+        <p>By: {{ log.auth }}</p>
+        <p>Horse(s) mentioned: {{ log.horse }}</p>
+
     </div>
 {% endblock content %}
