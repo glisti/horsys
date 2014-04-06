@@ -11,7 +11,7 @@
     </div>
     {% for log in log_list %}
         <div class="row">
-            <h3><a href="{% url "log_detail" log.id %}">{{ log.name }}</a></h3>
+            <h3><a href="{% url "log_detail" log.id %}">{{ log.desc}}</a></h3>
         </div>
     {% endfor %}
     </div>
