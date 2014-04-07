@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
 
-from horses.models import Horse
+from horses.models import Horse, MedicalRecord
 from horses.forms import HorseForm
 
 class HorseList(ListView):
