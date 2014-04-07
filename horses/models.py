@@ -39,3 +39,9 @@ class MedicalRecord(models.Model):
     horse = models.ForeignKey('Horse')
     title = models.CharField(max_length=100)
     # form = models.FileField(upload_to='records')
+
+class Task(models.Model):
+    horse    = models.ForeignKey('Horse')
+    task     = models.TextField()
+    program  = models.CharField(max_length=100)
+    comments = models.TextField()
