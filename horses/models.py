@@ -38,5 +38,4 @@ class Horse(models.Model):
 class MedicalRecord(models.Model):
     horse = models.ForeignKey('Horse')
     title = models.CharField(max_length=100)
-    # form fields...
-
+    # form = models.FileField(upload_to='records')
