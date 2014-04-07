@@ -13,6 +13,9 @@
       <ul class="nav navbar-nav">
         <li {% block horses %}{% endblock %}><a href="{% url "horse_list" %}">Horses</a></li>
       </ul>
+	  <ul class="nav navbar-nav">
+        <li {% block schedule %}{% endblock %}><a href="{% url "log_list" %}">Schedule</a></li>
+      </ul>
       {% if user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
