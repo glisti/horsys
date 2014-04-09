@@ -1,0 +1,18 @@
+{% extends 'horse_base.html' %}
+{% block title %}Tasks{% endblock %}
+{% block content %}
+    <div class="row">
+        <h1>Task List</h1>
+    </div>
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{% url "task_create" %}">Create Task</a>
+        </div>
+    </div>
+    {% for task in task_list %}
+        <div class="row">
+            <h3><a href="{% url "task_detail" task.id %}">{{ task.task }}</a></h3>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}

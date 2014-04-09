@@ -5,17 +5,41 @@
 {% endblock horses %}
 {% block content %}
     <div class="row">
-        <h1>Horse List</h1>
+        <h1>Horses Home</h1>
     </div>
     <div class="row">
         <div class="pull-right">
-            <a class="btn btn-primary" href="{% url "horse_create" %}">Create Horse</a>
+            <a class="btn btn-primary" href="{% url "horse_create" %}">Add Horse</a>
         </div>
     </div>
-    {% for horse in horse_list %}
-        <div class="row">
-            <h3><a href="{% url "horse_detail" horse.id %}">{{ horse.name }}</a></h3>
+
+    <!-- Nav tabs -->
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#FeedingTable" data-toggle="tab">FeedingTable</a></li>
+            <li><a href="#Horses" data-toggle="tab">Horses</a></li>
+        </ul>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="FeedingTable">
+            <table>
+                <tr>
+
+                </tr>
+            </table>
         </div>
-    {% endfor %}
+        <div class="tab-pane" id="Horses">
+            {% for horse in horse_list %}
+                <div class="row">
+                    <h3><a href="{% url "horse_detail" horse.id %}">{{ horse.name }}</a></h3>
+                </div>
+            {% empty %}
+                <div class="row">
+                    <h3><em>There are 0 horses in the database...</em></h3>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

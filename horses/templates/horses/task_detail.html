@@ -1,0 +1,19 @@
+{% extends 'horse_base.html' %}
+{% block title %}Task{% endblock title %}
+{% block content %}
+    <div class="row">
+        <h1>Task Detail</h1>
+    </div>
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{% url "task_update" task.id %}">Edit</a>
+            <a class="btn btn-danger" href="{% url "task_delete" task.id %}">Delete</a>
+        </div>
+    </div>
+    <div class="row">
+        <p> <a href="{% url "horse_detail" task.horse.id %}">{{task.horse.name}}</a></p>
+        <p>{{task.task}}</p>
+        <p>{{task.program}}</p>
+        <p>{{task.comments}}</p>
+    </div>
+{% endblock content %}
