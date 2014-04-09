@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from horses.views import HorseList, HorseCreate, HorseDetail, \
-                         HorseUpdate, HorseDelete
+from horses.views import *
+
 urlpatterns = patterns('',
     url(r'^$', HorseList.as_view(), name='horse_list'),
 

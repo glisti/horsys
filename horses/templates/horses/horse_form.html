@@ -1,6 +1,9 @@
 {% extends 'horse_base.html' %}
 {% block title %}Horse Management{% endblock title %}
 {% block content %}
+    <div class="page-header">
+        <h1>{{title}}</h1>
+    </div>
     {% load crispy_forms_tags %}
     {% crispy form %}
 {% endblock content %}

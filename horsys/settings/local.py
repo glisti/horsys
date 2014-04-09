@@ -18,6 +18,7 @@ DATABASES = {
 INSTALLED_APPS += (
     'horses',
     'schedule',
+    'debug_toolbar',
 )
 
 # MEDIA_ROOT = os.path.join(BASE_DIR,'media')
