@@ -2,20 +2,84 @@
 {% block title %}{{ horse.name }}{% endblock title %}
 {% block content %}
     <div class="row">
-        <h1>Horse Detail</h1>
-    </div>
-    <div class="row">
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{% url "horse_update" horse.id %}">Edit</a>
-            <a class="btn btn-danger" href="{% url "horse_delete" horse.id %}">Delete</a>
+        <div class="col-md-9">
+            <div id="header" class="row">
+                <h1>{{ horse.name }} <small>is in the {{ horse.location }}</small></h1>
+                <hr/>
+                <div class="col-md-12"><p><em>{{ horse.description }}</em></p></div>
+            </div>
+            <div id="owner" class="row">
+                <h3>Owner</h3>
+                <div class="col-md-12">
+                    <p>{{ horse.owner_name }}</p>
+                </div>
+            </div>
+            <div id="feeding" class="row">
+                <h3>Feeding Information</h3>
+                <div class="col-md-6">
+                    <h5>Feed</h5>
+                    <p>{{ horse.feed }}</p>
+                    <h5>AM Amount</h5>
+                    <p>{{ horse.am_amount }}</p>
+                    <h5>PM Amount</h5>
+                    <p>{{ horse.pm_amount }}</p>
+                    <h5>Beet Pulp</h5>
+                    <p>{{ horse.beet_pulp }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Rice Bran</h5>
+                    <p>{{ horse.rice_bran }}</p>
+                    <h5>Supplements</h5>
+                    <p>{{ horse.supplements }}</p>
+                    <h5>Hay</h5>
+                    <p>{{ horse.hay }}</p>
+                    <h5>Turnout</h5>
+                    <p>{{ horse.turnout }}</p>
+                </div>
+            </div>
+            <div id="blanketing" class="row">
+                <h3>Blanketing Instructions</h3>
+                <div class="col-md-12">
+                    <p>{{ horse.blanketing_instructions }}</p>
+                </div>
+            </div>
+            <div id="notes" class="row">
+                <h3>General Notes</h3>
+                <div class="col-md-12">
+                    <p>{{ horse.notes }}</p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <p>{{ horse.name }}</p>
-        <p>{{ horse.nickname }}</p>
-        <p>{{ horse.color }}</p>
-        <p>{{ horse.breed }}</p>
-        <p>{{ horse.height }}</p>
-        <p>{{ horse.weight }}</p>
+        <div class="col-md-3">
+            <div class="row">
+                <img src="http://placehold.it/250x150">
+            </div>
+            <div class="row">
+                <br/>
+                <a class="btn btn-default" href="{% url "task_create" %}">Add Task</a>
+                <a class="btn btn-primary" href="{% url "horse_update" horse.id %}">Edit</a>
+                <a class="btn btn-danger" href="{% url "horse_delete" horse.id %}">Remove</a>
+            </div>
+            <div class="row">
+                <br/>
+                <h3>Tasks</h3>
+                <hr/>
+            </div>
+            {% for task in tasks %}
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><a href="{% url "task_detail" task.id %}">{{task.program}}</a></h3>
+                        </div>
+                        <div class="panel-body">
+                            {{task.task}}
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            {% empty %}
+                <p><em>{{horse.name}} has no tasks</em></p>
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

@@ -33,10 +33,26 @@ class Horse(models.Model):
         return self.name
 
     def get_abosulte_url(self):
-        return reverse('horses.views.horse_detail', kwargs={'pk': self.pk}) #args=[str(self.id)])
+        return reverse('horses.views.horse_detail', kwargs={'pk': self.pk})
 
 class MedicalRecord(models.Model):
     horse = models.ForeignKey('Horse')
     title = models.CharField(max_length=100)
-    # form fields...
+    # form = models.FileField(upload_to='records')
+    # added by
 
+    def get_abosulte_url(self):
+        return reverse('horses.views.medicalrecord_detail', kwargs={'pk': self.pk})
+
+class Task(models.Model):
+    horse    = models.ForeignKey('Horse')
+    task     = models.TextField()
+    program  = models.CharField(max_length=100)
+    comments = models.TextField()
+    # added by
+    # completed
+
+    def get_abosulte_url(self):
+        return reverse('horses.views.task_detail', kwargs={'pk': self.pk})
+
+# mak notes a class with text and added by fields
