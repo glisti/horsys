@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_notify.urls import get_pattern as get_notify_pattern
 
 from django.contrib import admin
 admin.autodiscover()
@@ -9,4 +11,6 @@ urlpatterns = patterns('',
     url(r'^horses/', include('horses.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schedule/', include('schedule.urls')),
+    url(r'^notify/', get_notify_pattern()),
+    url(r'^wiki/', get_wiki_pattern())
 )

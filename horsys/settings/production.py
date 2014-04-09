@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 WSGI_APPLICATION = 'horsys.wsgi.application'
@@ -28,9 +28,14 @@ INSTALLED_APPS += (
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
+ROOT_PATH = os.path.join(os.path.dirname(__file__), '..')  # up one level from settings.py
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.abspath(os.path.join(ROOT_PATH, 'static')), # static is on root level
 )
+
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
