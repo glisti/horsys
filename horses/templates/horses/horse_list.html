@@ -24,16 +24,47 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="FeedingTable">
-            <table>
-                <tr>
-
-                </tr>
-            </table>
+            <div class="row">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Horse</th>
+                            <th>Location</th>
+                            <th>Feed</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>Beet Pulp</th>
+                            <th>Rice Bran</th>
+                            <th>Supplements</th>
+                            <th>Hay</th>
+                            <th>Turn Out</th>
+                            <th>Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for horse in horse_list %}
+                        <tr>
+                            <td><a href="{{ horse.get_absolute_url }}">{{horse.name}}</a></td>
+                            <td>{{horse.location}}</td>
+                            <td>{{horse.feed}}</td>
+                            <td>{{horse.am_amount}}</td>
+                            <td>{{horse.pm_amount}}</td>
+                            <td>{{horse.beet_pulp}}</td>
+                            <td>{{horse.rice_bran}}</td>
+                            <td>{{horse.supplements}}</td>
+                            <td>{{horse.hay}}</td>
+                            <td>{{horse.turnout}}</td>
+                            <td>{{horse.owner_name}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="tab-pane" id="Horses">
             {% for horse in horse_list %}
                 <div class="row">
-                    <h3><a href="{% url "horse_detail" horse.id %}">{{ horse.name }}</a></h3>
+                    <h3><a href="{{ horse.get_absolute_url }}">{{ horse.name }}</a></h3>
                 </div>
             {% empty %}
                 <div class="row">
