@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 
-import datetime
 import os
 
 FRONT_PASTURE = 'FRONT'
@@ -17,7 +17,7 @@ PLACEMENT_CHOICES = (
 
 class AutoDateTimeField(models.DateTimeField):
     def pre_save(self, model_instance, add):
-        return datetime.datetime.now()
+        return timezone.now()
 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^horses\.models\.AutoDateTimeField"])
@@ -29,19 +29,19 @@ add_introspection_rules([], ["^horses\.models\.AutoDateTimeField"])
 #     return os.path.join('horses',str(instance.id),'record', '%Y/%m/%d')
 
 class Horse(models.Model):
-    name                    = models.CharField(max_length=100, unique=True)
+    name                    = models.CharField(max_length=25, unique=True)
     photo                   = models.ImageField(upload_to='horses/photos', blank=True)
     description             = models.TextField()
-    owner_name              = models.CharField(max_length=100)
+    owner_name              = models.CharField(max_length=25)
     location                = models.CharField(max_length=6, choices=PLACEMENT_CHOICES,default=STALLS)
-    feed                    = models.CharField(max_length=100, blank=True)
-    am_amount               = models.CharField(max_length=100, blank=True)
-    pm_amount               = models.CharField(max_length=100, blank=True)
-    beet_pulp               = models.CharField(max_length=30, blank=True)
-    rice_bran               = models.CharField(max_length=30, blank=True)
-    supplements             = models.CharField(max_length=100, blank=True)
-    hay                     = models.CharField(max_length=100, blank=True)
-    turnout                 = models.CharField(max_length=100, blank=True)
+    feed                    = models.CharField(max_length=35, blank=True)
+    am_amount               = models.CharField(max_length=35, blank=True)
+    pm_amount               = models.CharField(max_length=35, blank=True)
+    beet_pulp               = models.CharField(max_length=35, blank=True)
+    rice_bran               = models.CharField(max_length=35, blank=True)
+    supplements             = models.CharField(max_length=35, blank=True)
+    hay                     = models.CharField(max_length=35, blank=True)
+    turnout                 = models.CharField(max_length=35, blank=True)
     blanketing_instructions = models.TextField(blank=True)
     created                 = AutoDateTimeField(editable=False)
     modified                = AutoDateTimeField()

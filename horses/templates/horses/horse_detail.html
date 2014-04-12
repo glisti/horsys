@@ -1,4 +1,5 @@
 {% extends 'horse_base.html' %}
+{% load tz %}
 {% block title %}{{ horse.name }}{% endblock title %}
 {% block content %}
     <div class="row">
@@ -50,7 +51,7 @@
                         <div class="row">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    {{note.text}} - <small><em>{{note.created}}</em></small>
+                                    {{note.text}} - <small><em>{{note.created|timezone:'America/Chicago'}}</em></small>
                                 </div>
                             </div>
                         </div>
