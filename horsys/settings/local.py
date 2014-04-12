@@ -20,4 +20,5 @@ INSTALLED_APPS += (
     'schedule',
     'debug_toolbar',
     'autofixture',
+    'dev',
 )
