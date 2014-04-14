@@ -5,8 +5,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 
 
-from horses.models import Horse, MedicalRecord, Task, Note
-from horses.forms import HorseForm, MedicalRecordForm, TaskForm, NoteForm
+from horses.models import Horse, MedicalRecord, Task, Log
+from horses.forms import HorseForm, MedicalRecordForm, TaskForm, LogForm
 
 from core.mixins import AjaxResponseMixin
 
@@ -35,7 +35,7 @@ class HorseDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(HorseDetail, self).get_context_data(**kwargs)
         context['tasks']   = Task.objects.filter(horse_id__exact=self.object.id)
-        context['notes']   = Note.objects.filter(horse_id__exact=self.object.id)
+        context['logs']   = Log.objects.filter(horse_id__exact=self.object.id)
         context['records'] = MedicalRecord.objects.filter(horse_id__exact=self.object.id)
         return context
 
@@ -104,25 +104,25 @@ class TaskDelete(SuccessMessageMixin, DeleteView):
 
 
 # ====================================================================
-# Note
+# Log
 # ====================================================================
 
-class NoteCreate(SuccessMessageMixin, CreateView):
-    model           = Note
-    form_class      = NoteForm
-    success_message = 'The Note was created successfully.'
+class LogCreate(SuccessMessageMixin, CreateView):
+    model           = Log
+    form_class      = LogForm
+    success_message = 'The Log was created successfully.'
 
     def get_context_data(self, **kwargs):
-        context = super(NoteCreate, self).get_context_data(**kwargs)
-        context['title'] = 'Add a New Note'
+        context = super(LogCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New Log'
         return context
 
     def get_success_url(self):
         return reverse('horse_detail',args=(self.object.horse.id,))
 
-class NoteDelete(SuccessMessageMixin, DeleteView):
-    model           = Note
-    success_message = 'The Note was deleted successfully.'
+class LogDelete(SuccessMessageMixin, DeleteView):
+    model           = Log
+    success_message = 'The Log was deleted successfully.'
     success_url     = reverse_lazy('horse_list')
 
 
