@@ -56,8 +56,23 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="Horses">
+                    <br/>
                 {% for horse in horse_list %}
-                    <h3><a href="{{ horse.get_absolute_url }}">{{horse.name}}</a></h3>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="{{horse.get_absolute_url}}">
+                            {% if horse.photo %}
+                                <img class="img-thumbnail" height="84" width="84" src="{{horse.photo.url}}" alt="horse headshot">
+                            {% else %}
+                                <img class="img-thumbnail" height="84" width="84" src="http://placehold.it/64x64&text=No+Picture" alt="horse headshot">
+                            {% endif %}
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{horse.name}}</h4>
+                                {{horse.description}}
+                            </div>
+                        </li>
+                    </ul>
                 {% empty %}
                     <h3><em>There are 0 horses in the database...</em></h3>
                 {% endfor %}
