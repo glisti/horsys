@@ -125,7 +125,7 @@
                 {% endif %}
             </div>
             <h3>
-                Tasks
+                <a href="{% url "horsetask_list" horse.id %}">Tasks</a>
                 <div class="pull-right">
                     <a class="btn btn-primary btn-sm" href="{% url "task_create" %}"><span class="glyphicon glyphicon-plus"></span> Add</a>
                 </div>

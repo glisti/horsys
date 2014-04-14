@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/update/$', HorseUpdate.as_view(), name='horse_update'),
     url(r'^(?P<pk>\d+)/delete/$', HorseDelete.as_view(), name='horse_delete'),
 
+    url(r'^(?P<pk>\d+)/tasks/$', HorseTaskList.as_view(), name='horsetask_list'),
+
     url(r'^task/add/$', TaskCreate.as_view(), name='task_create'),
     url(r'^task/(?P<pk>\d+)/$', TaskDetail.as_view(), name='task_detail'),
     url(r'^task/(?P<pk>\d+)/update/$', TaskUpdate.as_view(), name='task_update'),

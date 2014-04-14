@@ -2,6 +2,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
+
 
 from horses.models import Horse, MedicalRecord, Task, Note
 from horses.forms import HorseForm, MedicalRecordForm, TaskForm, NoteForm
@@ -35,6 +37,16 @@ class HorseDetail(DetailView):
         context['tasks']   = Task.objects.filter(horse_id__exact=self.object.id)
         context['notes']   = Note.objects.filter(horse_id__exact=self.object.id)
         context['records'] = MedicalRecord.objects.filter(horse_id__exact=self.object.id)
+        return context
+
+class HorseTaskList(ListView):
+    def get_queryset(self):
+        self.horse = get_object_or_404(Horse, pk=self.kwargs['pk'])
+        return Task.objects.filter(horse=self.horse)
+
+    def get_context_data(self, **kwargs):
+        context = super(HorseTaskList, self).get_context_data(**kwargs)
+        context['horse'] = self.horse
         return context
 
 class HorseUpdate(SuccessMessageMixin, UpdateView):
