@@ -9,8 +9,17 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/update/$', HorseUpdate.as_view(), name='horse_update'),
     url(r'^(?P<pk>\d+)/delete/$', HorseDelete.as_view(), name='horse_delete'),
 
+    url(r'^(?P<pk>\d+)/tasks/$', HorseTaskList.as_view(), name='horsetask_list'),
+
     url(r'^task/add/$', TaskCreate.as_view(), name='task_create'),
     url(r'^task/(?P<pk>\d+)/$', TaskDetail.as_view(), name='task_detail'),
     url(r'^task/(?P<pk>\d+)/update/$', TaskUpdate.as_view(), name='task_update'),
     url(r'^task/(?P<pk>\d+)/delete/$', TaskDelete.as_view(), name='task_delete'),
+
+    url(r'^note/add/$', NoteCreate.as_view(), name='note_create'),
+    url(r'^note/(?P<pk>\d+)/delete/$', NoteDelete.as_view(), name='note_delete'),
+
+    url(r'^record/add/$', MedicalRecordCreate.as_view(), name='record_create'),
+    url(r'^record/(?P<pk>\d+)/update/$', MedicalRecordUpdate.as_view(), name='record_update'),
+    url(r'^record/(?P<pk>\d+)/delete/$', MedicalRecordDelete.as_view(), name='record_delete'),
 )

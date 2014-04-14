@@ -19,7 +19,7 @@ INSTALLED_APPS += (
     'horses',
     'schedule',
     'debug_toolbar',
+    'autofixture',
+    'dev',
+    'core',
 )
-
-# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-# MEDIA_URL = '/media/'

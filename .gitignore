@@ -7,6 +7,8 @@ staticfiles
 *.db
 .DS_Store
 .idea
+media/
+static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

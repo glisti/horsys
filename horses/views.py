@@ -1,66 +1,159 @@
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
 
-from horses.models import Horse, MedicalRecord, Task
-from horses.forms import HorseForm, MedicalRecordForm, TaskForm
+
+from horses.models import Horse, MedicalRecord, Task, Note
+from horses.forms import HorseForm, MedicalRecordForm, TaskForm, NoteForm
+
+from core.mixins import AjaxResponseMixin
+
+# ====================================================================
+# Horse
+# ====================================================================
 
 class HorseList(ListView):
-    model = Horse
+    model            = Horse
     context_obj_name = 'horse_list'
 
-class HorseCreate(CreateView):
-    model = Horse
-    form_class = HorseForm
-    def get_success_url(self):
-        return reverse('horse_detail',args=(self.object.id,))
+class HorseCreate(SuccessMessageMixin, CreateView):
+    model           = Horse
+    form_class      = HorseForm
+    success_message = "%(name)s was created successfully."
+
     def get_context_data(self, **kwargs):
         context = super(HorseCreate, self).get_context_data(**kwargs)
         context['title'] = 'Add a New Horse'
         return context
 
 class HorseDetail(DetailView):
-    model = Horse
+    model            = Horse
     context_obj_name = 'horse'
+
     def get_context_data(self, **kwargs):
         context = super(HorseDetail, self).get_context_data(**kwargs)
-        context['tasks'] = Task.objects.filter(horse_id__exact=self.object.id)
+        context['tasks']   = Task.objects.filter(horse_id__exact=self.object.id)
+        context['notes']   = Note.objects.filter(horse_id__exact=self.object.id)
+        context['records'] = MedicalRecord.objects.filter(horse_id__exact=self.object.id)
         return context
 
-class HorseUpdate(UpdateView):
-    model = Horse
-    form_class = HorseForm
-    context_obj_name = 'horses'
+class HorseTaskList(ListView):
+    def get_queryset(self):
+        self.horse = get_object_or_404(Horse, pk=self.kwargs['pk'])
+        return Task.objects.filter(horse=self.horse)
+
+    def get_context_data(self, **kwargs):
+        context = super(HorseTaskList, self).get_context_data(**kwargs)
+        context['horse'] = self.horse
+        return context
+
+class HorseUpdate(SuccessMessageMixin, UpdateView):
+    model            = Horse
+    form_class       = HorseForm
+    success_message  = "%(name)s was updated successfully."
+
     def get_context_data(self, **kwargs):
         context = super(HorseUpdate, self).get_context_data(**kwargs)
         context['title'] = 'Edit %s\'s profile' % self.object.name
         return context
 
-class HorseDelete(DeleteView):
-    model = Horse
-    success_url = reverse_lazy('horse_list')
+class HorseDelete(SuccessMessageMixin, DeleteView):
+    model           = Horse
+    success_message = 'The Horse was removed successfully.'
+    success_url     = reverse_lazy('horse_list')
 
-# ===== Tasks ===== #
+
+# ====================================================================
+# Tasks
+# ====================================================================
 
 class TaskList(ListView):
-    model = Task
+    model            = Task
     context_obj_name = 'task_list'
 
-class TaskCreate(CreateView):
-    model = Task
-    form_class = TaskForm
-    def get_success_url(self):
-        return reverse('task_detail',args=(self.object.id,))
+class TaskCreate(SuccessMessageMixin, CreateView):
+    model           = Task
+    form_class      = TaskForm
+    success_message = 'The Task was created successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New Task'
+        return context
 
 class TaskDetail(DetailView):
-    model = Task
+    model            = Task
     context_obj_name = 'task'
 
-class TaskUpdate(UpdateView):
-    model = Task
-    form_class = TaskForm
-    context_obj_name = 'tasks'
+class TaskUpdate(SuccessMessageMixin, UpdateView):
+    model            = Task
+    form_class       = TaskForm
+    success_message  = 'The Task was updated successfully.'
 
-class TaskDelete(DeleteView):
-    model = Task
-    success_url = reverse_lazy('horse_list')
+    def get_context_data(self, **kwargs):
+        context = super(TaskUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit %s\'s Task' % self.object.horse.name
+        return context
+
+class TaskDelete(SuccessMessageMixin, DeleteView):
+    model           = Task
+    success_message = 'Task deletion was successfull.'
+    success_url     = reverse_lazy('horse_list')
+
+
+# ====================================================================
+# Note
+# ====================================================================
+
+class NoteCreate(SuccessMessageMixin, CreateView):
+    model           = Note
+    form_class      = NoteForm
+    success_message = 'The Note was created successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(NoteCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New Note'
+        return context
+
+    def get_success_url(self):
+        return reverse('horse_detail',args=(self.object.horse.id,))
+
+class NoteDelete(SuccessMessageMixin, DeleteView):
+    model           = Note
+    success_message = 'The Note was deleted successfully.'
+    success_url     = reverse_lazy('horse_list')
+
+
+# ====================================================================
+# MedicalRecord
+# ====================================================================
+
+class MedicalRecordCreate(SuccessMessageMixin, CreateView):
+    model           = MedicalRecord
+    form_class      = MedicalRecordForm
+    success_message = 'The Medical Record was created successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalRecordCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New Medical Record'
+        return context
+
+    def get_success_url(self):
+        return reverse('horse_detail',args=(self.object.horse.id,))
+
+class MedicalRecordUpdate(SuccessMessageMixin, UpdateView):
+    model            = MedicalRecord
+    form_class       = MedicalRecordForm
+    success_message  = 'The Medical Record was updated successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalRecordUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit %s\'s Medical Record' % self.object.horse.name
+        return context
+
+class MedicalRecordDelete(SuccessMessageMixin, DeleteView):
+    model           = MedicalRecord
+    success_message = 'The Medical Record was deleted successfully.'
+    success_url     = reverse_lazy('horse_list')

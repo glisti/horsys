@@ -1,19 +1,30 @@
 {% extends 'horse_base.html' %}
+{% load tz %}
 {% block title %}Task{% endblock title %}
 {% block content %}
     <div class="row">
-        <h1>Task Detail</h1>
-    </div>
-    <div class="row">
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{% url "task_update" task.id %}">Edit</a>
-            <a class="btn btn-danger" href="{% url "task_delete" task.id %}">Delete</a>
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Task for <a href="{% url "horse_detail" task.horse.id %}">{{task.horse.name}}</a>
+                    <small>
+                        - <em>added: {{task.created|timezone:'America/Chicago'}}</em>
+                        <div class="pull-right">
+                            <a class="btn btn-info btn-sm" href="{% url "task_update" task.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url "task_delete" task.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                        </div>
+                    </small>
+                </h1>
+            </div>
+            {% if task.completed %}
+                <div class="alert alert-success"><strong>{{task.horse.name}}</strong> completed this task as of {{task.modified|timezone:'America/Chicago'}}</div>
+            {% else %}
+                <div class="alert alert-danger"><strong>{{task.horse.name}}</strong> needs to complete this task.</div>
+            {% endif %}
+            <!--<p>- <small><em>Added: {{task.created|timezone:'America/Chicago'}}</em></small></p>-->
+            <h3>Program</h3>
+            <p>{{task.program}}</p>
+            <h3>Task</h3>
+            <p>{{task.task}}</p>
         </div>
-    </div>
-    <div class="row">
-        <p> <a href="{% url "horse_detail" task.horse.id %}">{{task.horse.name}}</a></p>
-        <p>{{task.task}}</p>
-        <p>{{task.program}}</p>
-        <p>{{task.comments}}</p>
     </div>
 {% endblock content %}

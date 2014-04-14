@@ -1,18 +1,39 @@
 {% extends 'horse_base.html' %}
 {% block title %}Tasks{% endblock %}
+{% load tz %}
 {% block content %}
     <div class="row">
-        <h1>Task List</h1>
-    </div>
-    <div class="row">
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{% url "task_create" %}">Create Task</a>
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>
+                    {{horse.name}}'s Tasks
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-sm" href="{% url "task_create" %}"><span class="glyphicon glyphicon-plus"></span> Add</a>
+                    </div>
+                </h1>
+            </div>
+            {% for task in object_list %}
+                {% if task.completed %}
+                    <div class="alert alert-success"><strong>{{task.horse.name}}</strong> completed this task as of {{task.modified|timezone:'America/Chicago'}}</div>
+                {% else %}
+                    <div class="alert alert-danger"><strong>{{task.horse.name}}</strong> needs to complete this task.</div>
+                {% endif %}
+                <h3>
+                    {{task.created|timezone:'America/Chicago'}}
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-sm" href="{% url "task_detail" task.id %}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+                        <a class="btn btn-info btn-sm" href="{% url "task_update" task.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url "task_delete" task.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                    </div>
+                </h3>
+                <h3>Program</h3>
+                <p>{{task.program}}</p>
+                <h3>Task</h3>
+                <p>{{task.task}}</p>
+                <hr/>
+            {% empty %}
+                <p><em>{{horse.name}} has no tasks.</em></p>
+            {% endfor %}
         </div>
-    </div>
-    {% for task in task_list %}
-        <div class="row">
-            <h3><a href="{% url "task_detail" task.id %}">{{ task.task }}</a></h3>
-        </div>
-    {% endfor %}
     </div>
 {% endblock content %}

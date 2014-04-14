@@ -6,6 +6,7 @@
             {% csrf_token %}
             <h3>Are you sure you want to delete "{{ horse.name }}"?</h3>
             <input type="submit" class="btn btn-danger" value="Confirm" />
+            <a class="btn btn-default" href="{{ horse.get_absolute_url }}">Cancel</a>
         </form>
     </div>
 {% endblock content %}
