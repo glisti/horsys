@@ -28,6 +28,11 @@ add_introspection_rules([], ["^horses\.models\.AutoDateTimeField"])
 # def record_path(instance, file):
 #     return os.path.join('horses',str(instance.id),'record', '%Y/%m/%d')
 
+def photo_path(instance, file):
+    ext = file.split('.')[-1]
+    filename = "%s.%s" % (instance.name)
+    return os.path.join('horses/photos',filename)
+
 class Horse(models.Model):
     name                    = models.CharField(max_length=25, unique=True)
     photo                   = models.ImageField(upload_to='horses/photos', blank=True)

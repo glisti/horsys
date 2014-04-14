@@ -8,6 +8,10 @@ from horses.forms import HorseForm, MedicalRecordForm, TaskForm, NoteForm
 
 from core.mixins import AjaxResponseMixin
 
+# ====================================================================
+# Horse
+# ====================================================================
+
 class HorseList(ListView):
     model            = Horse
     context_obj_name = 'horse_list'
@@ -36,7 +40,6 @@ class HorseDetail(DetailView):
 class HorseUpdate(SuccessMessageMixin, UpdateView):
     model            = Horse
     form_class       = HorseForm
-    context_obj_name = 'horses'
     success_message  = "%(name)s was updated successfully."
 
     def get_context_data(self, **kwargs):
@@ -49,7 +52,10 @@ class HorseDelete(SuccessMessageMixin, DeleteView):
     success_message = 'The Horse was removed successfully.'
     success_url     = reverse_lazy('horse_list')
 
-# ===== Tasks ===== #
+
+# ====================================================================
+# Tasks
+# ====================================================================
 
 class TaskList(ListView):
     model            = Task
@@ -72,15 +78,22 @@ class TaskDetail(DetailView):
 class TaskUpdate(SuccessMessageMixin, UpdateView):
     model            = Task
     form_class       = TaskForm
-    context_obj_name = 'tasks'
     success_message  = 'The Task was updated successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit %s\'s Task' % self.object.horse.name
+        return context
 
 class TaskDelete(SuccessMessageMixin, DeleteView):
     model           = Task
     success_message = 'Task deletion was successfull.'
     success_url     = reverse_lazy('horse_list')
 
-# ===== Notes ===== #
+
+# ====================================================================
+# Note
+# ====================================================================
 
 class NoteCreate(SuccessMessageMixin, CreateView):
     model           = Note
@@ -100,7 +113,10 @@ class NoteDelete(SuccessMessageMixin, DeleteView):
     success_message = 'The Note was deleted successfully.'
     success_url     = reverse_lazy('horse_list')
 
-# ===== MedicalRecord ===== #
+
+# ====================================================================
+# MedicalRecord
+# ====================================================================
 
 class MedicalRecordCreate(SuccessMessageMixin, CreateView):
     model           = MedicalRecord
@@ -114,6 +130,16 @@ class MedicalRecordCreate(SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return reverse('horse_detail',args=(self.object.horse.id,))
+
+class MedicalRecordUpdate(SuccessMessageMixin, UpdateView):
+    model            = MedicalRecord
+    form_class       = MedicalRecordForm
+    success_message  = 'The Medical Record was updated successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(MedicalRecordUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit %s\'s Medical Record' % self.object.horse.name
+        return context
 
 class MedicalRecordDelete(SuccessMessageMixin, DeleteView):
     model           = MedicalRecord
