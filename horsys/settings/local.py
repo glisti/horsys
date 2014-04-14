@@ -21,4 +21,5 @@ INSTALLED_APPS += (
     'debug_toolbar',
     'autofixture',
     'dev',
+    'core',
 )

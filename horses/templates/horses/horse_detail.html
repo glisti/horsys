@@ -1,95 +1,143 @@
 {% extends 'horse_base.html' %}
 {% load tz %}
-{% block title %}{{ horse.name }}{% endblock title %}
+{% block title %}{{horse.name}}{% endblock title %}
 {% block content %}
     <div class="row">
         <div class="col-md-9">
-            <div id="header" class="row">
-                <h1>{{ horse.name }} <small>is in the {{ horse.location }}</small></h1>
-                <hr/>
-                <div class="col-md-12"><p><em>{{ horse.description }}</em></p></div>
-            </div>
-            <div id="owner" class="row">
-                <h3>Owner</h3>
-                <div class="col-md-12">
-                    <p>{{ horse.owner_name }}</p>
-                </div>
-            </div>
-            <div id="feeding" class="row">
-                <h3>Feeding Information</h3>
-                <div class="col-md-6">
-                    <h5>Feed</h5>
-                    <p>{{ horse.feed }}</p>
-                    <h5>AM Amount</h5>
-                    <p>{{ horse.am_amount }}</p>
-                    <h5>PM Amount</h5>
-                    <p>{{ horse.pm_amount }}</p>
-                    <h5>Beet Pulp</h5>
-                    <p>{{ horse.beet_pulp }}</p>
-                </div>
-                <div class="col-md-6">
-                    <h5>Rice Bran</h5>
-                    <p>{{ horse.rice_bran }}</p>
-                    <h5>Supplements</h5>
-                    <p>{{ horse.supplements }}</p>
-                    <h5>Hay</h5>
-                    <p>{{ horse.hay }}</p>
-                    <h5>Turnout</h5>
-                    <p>{{ horse.turnout }}</p>
-                </div>
-            </div>
-            <div id="blanketing" class="row">
-                <h3>Blanketing Instructions</h3>
-                <div class="col-md-12">
-                    <p>{{ horse.blanketing_instructions }}</p>
-                </div>
-            </div>
-            <div id="notes" class="row">
-                <h3>General Notes</h3>
-                <div class="col-md-12">
-                    {% for note in notes %}
-                        <div class="row">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    {{note.text}} - <small><em>{{note.created|timezone:'America/Chicago'}}</em></small>
-                                </div>
-                            </div>
+            <div id="header" class="page-header">
+                <h1>{{horse.name}}
+                    <small>
+                        is in the {{horse.location}}
+                        <div class="pull-right">
+                            <a class="btn btn-info btn-sm" href="{% url "horse_update" horse.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url "horse_delete" horse.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
                         </div>
-                    {% empty %}
-                        <div class="row">
-                            <div class="col-md-12"><p><em>{{horse.name}} has no notes</em></p></div>
-                        </div>
-                    {% endfor %}
+                    </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12"><p><em>{{horse.description}}</em></p></div>
+            </div>
+            <div id="owner">
+                <div class="page-header">
+                    <h3>Owner</h3>
                 </div>
+                <p>{{horse.owner_name}}</p>
+            </div>
+            <div id="feeding">
+                <div class="page-header">
+                    <h3>Feeding Information</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Feed</strong>
+                        <p>{{horse.feed}}</p>
+                        <strong>AM Amount</strong>
+                        <p>{{horse.am_amount}}</p>
+                        <strong>PM Amount</strong>
+                        <p>{{horse.pm_amount}}</p>
+                        <strong>Beet Pulp</strong>
+                        <p>{{horse.beet_pulp}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Rice Bran</strong>
+                        <p>{{horse.rice_bran}}</p>
+                        <strong>Supplements</strong>
+                        <p>{{horse.supplements}}</p>
+                        <strong>Hay</strong>
+                        <p>{{horse.hay}}</p>
+                        <strong>Turnout</strong>
+                        <p>{{horse.turnout}}</p>
+                    </div>
+                </div>
+            </div>
+            <div id="blanketing">
+                <div class="page-header">
+                    <h3>Blanketing Instructions</h3>
+                </div>
+                <p>{{horse.blanketing_instructions}}</p>
+            </div>
+            <div id="records">
+                <div class="page-header">
+                    <h3>Medical Records
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "record_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                    </h3>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Record</th>
+                            <th>Added</th>
+                            <th>Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for record in records %}
+                        <tr>
+                            <td>{{record.title}}</td>
+                            <td>{{record.created|timezone:'America/Chicago'}}</td>
+                            <td>{{record.modified|timezone:'America/Chicago'}}</td>
+                            <td align="center">
+                                <small>
+                                <a class="btn btn-default btn-xs" data-toggle="tooltip" title="view" href=""><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp
+                                <a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href=""><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+                                <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href=""><span class="glyphicon glyphicon-remove"></span></a>
+                                </small>
+                            </td>
+                        </tr>
+                {% empty %}
+                        <tr>
+                            <td colspan="4"><em>{{horse.name}} has no records.</em></td>
+                        </tr>
+                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="notes">
+                <div class="page-header">
+                    <h3>General Notes
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "note_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                    </h3>
+                </div>
+            {% for note in notes %}
+                <div class="">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a data-toggle="tooltip" title="delete" class="btn btn-default btn-xs pull-right" href="{% url "note_delete" note.id  %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            <br>
+                            <p>{{note.text}}</p>
+                            - <small><em>{{note.created|timezone:'America/Chicago'}}</em></small>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p><em>{{horse.name}} has no notes.</em></p>
+            {% endfor %}
             </div>
         </div>
         <div class="col-md-3">
-            <div class="row">
-                <img src="http://placehold.it/250x150">
+            <div class="hidden-xs">
+                <!-- need to serve static files -->
+                <img src="http://placehold.it/250x150" class="img-thumbnail">
             </div>
-            <div class="row">
-                <br/>
-                <a class="btn btn-default" href="{% url "task_create" %}">Add Task</a>
-                <a class="btn btn-primary" href="{% url "horse_update" horse.id %}">Edit</a>
-                <a class="btn btn-danger" href="{% url "horse_delete" horse.id %}">Remove</a>
-            </div>
-            <div class="row">
-                <br/>
-                <h3>Tasks</h3>
-                <hr/>
-            </div>
-            {% for task in tasks %}
-                <div class="row">
-                    <div class="panel {% if task.completed %} panel-success {% else %} panel-danger {% endif %}">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><a href="{{ task.get_absolute_url }}">{{task.program}}</a></h3>
-                        </div>
-                        <div class="panel-body">
-                            {{task.task}}
-                        </div>
-                    </div>
-                    <br/>
+            <h3>
+                Tasks
+                <div class="pull-right">
+                    <a class="btn btn-primary btn-sm" href="{% url "task_create" %}"><span class="glyphicon glyphicon-plus"></span> Add</a>
                 </div>
+            </h3>
+            <hr/>
+            {% for task in tasks %}
+                <div class="panel {% if task.completed %} panel-success {% else %} panel-danger {% endif %}">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><a href="{{ task.get_absolute_url }}">{{task.program}}</a></h3>
+                    </div>
+                    <div class="panel-body">
+                        {{task.task}}
+                    </div>
+                </div>
+                <br/>
             {% empty %}
                 <p><em>{{horse.name}} has no tasks</em></p>
             {% endfor %}

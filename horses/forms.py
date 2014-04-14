@@ -45,7 +45,7 @@ class TaskForm(forms.ModelForm):
         self.helper.layout.append(form_actions)
     class Meta:
         model = Task
-        exclude = ['completed','created','modified']
+        exclude = ['created','modified']
 
 class NoteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

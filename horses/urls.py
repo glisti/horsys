@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/update/$', TaskUpdate.as_view(), name='task_update'),
     url(r'^task/(?P<pk>\d+)/delete/$', TaskDelete.as_view(), name='task_delete'),
 
-    url(r'^note/(?P<pk>\d+)/create/$', NoteCreate.as_view(), name='note_create'),
+    url(r'^note/add/$', NoteCreate.as_view(), name='note_create'),
     url(r'^note/(?P<pk>\d+)/delete/$', NoteDelete.as_view(), name='note_delete'),
+
+    url(r'^record/add/$', MedicalRecordCreate.as_view(), name='record_create'),
+    url(r'^record/(?P<pk>\d+)/delete/$', MedicalRecordDelete.as_view(), name='record_delete'),
 )

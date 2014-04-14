@@ -1,76 +1,68 @@
 {% extends 'horse_base.html' %}
 {% block title %}Registered Horses{% endblock %}
-{% block horses %}
-    class="active"
-{% endblock horses %}
 {% block content %}
     <div class="row">
-        <h1>Horses Home</h1>
-    </div>
-    <div class="row">
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{% url "horse_create" %}">Add Horse</a>
-        </div>
-    </div>
-
-    <!-- Nav tabs -->
-    <div class="row">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#FeedingTable" data-toggle="tab">FeedingTable</a></li>
-            <li><a href="#Horses" data-toggle="tab">Horses</a></li>
-        </ul>
-    </div>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="tab-pane active" id="FeedingTable">
-            <div class="row">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Horse</th>
-                            <th>Location</th>
-                            <th>Feed</th>
-                            <th>AM</th>
-                            <th>PM</th>
-                            <th>Beet Pulp</th>
-                            <th>Rice Bran</th>
-                            <th>Supplements</th>
-                            <th>Hay</th>
-                            <th>Turn Out</th>
-                            <th>Owner</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for horse in horse_list %}
-                        <tr>
-                            <td><a href="{{ horse.get_absolute_url }}">{{horse.name}}</a></td>
-                            <td>{{horse.location}}</td>
-                            <td>{{horse.feed}}</td>
-                            <td>{{horse.am_amount}}</td>
-                            <td>{{horse.pm_amount}}</td>
-                            <td>{{horse.beet_pulp}}</td>
-                            <td>{{horse.rice_bran}}</td>
-                            <td>{{horse.supplements}}</td>
-                            <td>{{horse.hay}}</td>
-                            <td>{{horse.turnout}}</td>
-                            <td>{{horse.owner_name}}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Horses Home
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-sm" href="{% url "horse_create" %}"><span class="glyphicon glyphicon-plus"></span> Add Horse</a>
+                    </div>
+                </h1>
             </div>
-        </div>
-        <div class="tab-pane" id="Horses">
-            {% for horse in horse_list %}
-                <div class="row">
-                    <h3><a href="{{ horse.get_absolute_url }}">{{ horse.name }}</a></h3>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#FeedingTable" data-toggle="tab">FeedingTable</a></li>
+                <li><a href="#Horses" data-toggle="tab">Horses</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="FeedingTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Horse</th>
+                                <th>Location</th>
+                                <th>Feed</th>
+                                <th>AM</th>
+                                <th>PM</th>
+                                <th>Beet Pulp</th>
+                                <th>Rice Bran</th>
+                                <th>Supplements</th>
+                                <th>Hay</th>
+                                <th>Turn Out</th>
+                                <th>Owner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for horse in horse_list %}
+                            <tr>
+                                <td><a href="{{ horse.get_absolute_url }}">{{horse.name}}</a></td>
+                                <td>{{horse.location}}</td>
+                                <td>{{horse.feed}}</td>
+                                <td>{{horse.am_amount}}</td>
+                                <td>{{horse.pm_amount}}</td>
+                                <td>{{horse.beet_pulp}}</td>
+                                <td>{{horse.rice_bran}}</td>
+                                <td>{{horse.supplements}}</td>
+                                <td>{{horse.hay}}</td>
+                                <td>{{horse.turnout}}</td>
+                                <td>{{horse.owner_name}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-            {% empty %}
-                <div class="row">
+                <div class="tab-pane" id="Horses">
+                {% for horse in horse_list %}
+                    <h3><a href="{{ horse.get_absolute_url }}">{{horse.name}}</a></h3>
+                {% empty %}
                     <h3><em>There are 0 horses in the database...</em></h3>
+                {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock content %}
