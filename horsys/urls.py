@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^horses/', include('horses.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schedule/', include('schedule.urls')),
+	url(r'^customers/', include('customers.urls')),
 )
 
 from django.conf import settings
