@@ -3,25 +3,22 @@ from django.db import models
 
 from core.models import HorsysBaseModel
 
+TIME_CHOICES = (
+	('AM', 'AM'),
+	('PM', 'PM'),
+)
+
 class Shift(HorsysBaseModel):
 	feeder_name   = models.CharField(max_length=100)
-	turn_out       = models.BooleanField()
-	refill_water  = models.BooleanField()
-	feed_horses   = models.BooleanField()
-	close_haytrap = models.BooleanField()
-	open_haytrap  = models.BooleanField()
-	clean_stalls  = models.BooleanField()
-	tidy_barn     = models.BooleanField()
-	lights_off    = models.BooleanField()
-
-	def __unicode__(self):
-		return self.feeder_name
-
-	def is_today(self):
-		return self.date >= date.today()
+	time_of_day   = models.CharField(max_length=2,choices=TIME_CHOICES,default='AM')
+	turn_out      = models.BooleanField(default=False)
+	refill_water  = models.BooleanField(default=False)
+	feed_horses   = models.BooleanField(default=False)
+	close_haytrap = models.BooleanField(default=False)
+	open_haytrap  = models.BooleanField(default=False)
+	clean_stalls  = models.BooleanField(default=False)
+	tidy_barn     = models.BooleanField(default=False)
+	lights_off    = models.BooleanField(default=False)
 
 	def get_absolute_url(self):
-		return reverse('shift_detail', kwargs={'pk': self.pk})
-
-	def title(self):
-		return self.feeder_name + "  " + self.date.isoformat()
+		return reverse('shift_detail', kwargs={'time': self.time_of_day,'pk': self.pk})
