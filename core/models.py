@@ -12,6 +12,7 @@ class HorsysBaseModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['-created']
 
     # def save(self, *args, **kwargs):
     #     super(HorsysBaseModel, self).save(*args,**kwargs)

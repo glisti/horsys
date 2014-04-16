@@ -60,14 +60,14 @@
                 </div>
                 <div class="col-md-6">
                     <ul class="list-group">
-                        <li class="list-group-item {% if shift.clean_stalls %}list-group-item-success{% else %}list-group-item-danger{% endif %}">CLean Stalls</li>
+                        <li class="list-group-item {% if shift.clean_stalls %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Clean Stalls</li>
                         <li class="list-group-item {% if shift.tidy_barn %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Tidy Barn</li>
                         <li class="list-group-item {% if shift.lights_off %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Lights Off</li>
                     </ul>
                 </div>
             {% endif %}
         {% empty %}
-            <p><em>There are no previous shifts to review.</em></p>
+            <div class="col-md-12"><p><em>There are no previous shifts to review.</em></p></div>
         {% endfor %}
     </div>
 {% endblock content %}

@@ -51,6 +51,10 @@
                                 <td>{{horse.turnout}}</td>
                                 <td>{{horse.owner_name}}</td>
                             </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="11">There are 0 horses in the database...</td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
@@ -74,7 +78,7 @@
                         </li>
                     </ul>
                 {% empty %}
-                    <h3><em>There are 0 horses in the database...</em></h3>
+                    <p><em>There are 0 horses in the database...</em></p>
                 {% endfor %}
                 </div>
             </div>
