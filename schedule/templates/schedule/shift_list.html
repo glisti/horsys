@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Shift List{% endblock %}
+{% block content %}
+
+<h1 align=center>Shift Entries</h1>
+
+<head>
+<style type="text/css">
+table
+{
+    width:200px;
+    font-size: 13pt;
+    margin:0px;
+    border-collapse: serparate;
+}
+</style>
+</head>
+<table align="center">
+<tr>
+<th>Name</th>
+<th>Date</th>
+</tr>
+{% for shift in shift_list %}
+    <tr>
+        <td><a href="{% url "shift_detail" shift.id %}">{{ shift.feeder_name }}</a></td>
+        <td>{{shift.title}}</td>
+    </tr>{% endfor %}
+</table>
+
+
+{% endblock content %}
