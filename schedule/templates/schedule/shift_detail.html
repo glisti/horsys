@@ -8,7 +8,11 @@
                     {{shift.time_of_day}} shift for {{shift.created|date:"l F j"}}
                     <small>
                         <div class="pull-right">
-                            <a class="btn btn-primary btn-sm" href="{% url "shift_update" shift.time_of_day shift.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                        {% if shift.time_of_day == "AM" %}
+                            <a class="btn btn-primary btn-sm" href="{% url "shiftam_update" shift.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                        {% else %}
+                            <a class="btn btn-primary btn-sm" href="{% url "shiftpm_update" shift.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                        {% endif %}
                             <a class="btn btn-danger btn-sm" href="{% url "shift_delete" shift.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a>
                         </div>
                     </small>

@@ -10,56 +10,59 @@ class ShiftList(ListView):
     model            = Shift
     context_obj_name = 'shift_list'
 
-class ShiftCreate(SuccessMessageMixin, CreateView):
+class ShiftAMCreate(SuccessMessageMixin, CreateView):
     model           = Shift
-    success_url     = reverse_lazy('log_list')
-    success_message = 'Shift Created Successfully.'
-    form_class = ShiftAMForm
+    form_class      = ShiftAMForm
+    success_url     = reverse_lazy('shift_list')
+    success_message = 'AM Shift Created Successfully.'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(ShiftCreate, self).get_context_data(**kwargs)
-    #     print context['form']
-    #     if self.kwargs['time'] == 'PM':
-    #         context['title'] = 'Add a New PM Shift'
-    #         context['form']  = ShiftPMForm
-    #     else:
-    #         context['title'] = 'Add a New AM Shift'
-    #         context['form']  = ShiftAMForm
-    #     print context['form']
-    #     return context
-
-    def form_invalid(self,form):
-        print form.errors
-        return super(ShiftCreate,self).form_invalid(form)
+    def get_context_data(self, **kwargs):
+        context = super(ShiftAMCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New AM Shift'
+        return context
 
     def form_valid(self, form):
-        if self.request.method == 'POST':
-            form.instance.time_of_day == self.request.POST['time']
-        print self.request.POST['time']
-        return super(ShiftCreate, self).form_valid(form)
+        form.instance.time_of_day = 'AM'
+        return super(ShiftAMCreate, self).form_valid(form)
+
+class ShiftPMCreate(SuccessMessageMixin, CreateView):
+    model           = Shift
+    form_class      = ShiftPMForm
+    success_url     = reverse_lazy('shift_list')
+    success_message = 'PM Shift Created Successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShiftPMCreate, self).get_context_data(**kwargs)
+        context['title'] = 'Add a New PM Shift'
+        return context
+
+    def form_valid(self, form):
+        form.instance.time_of_day = 'PM'
+        return super(ShiftPMCreate, self).form_valid(form)
 
 class ShiftDetail(DetailView):
     model            = Shift
     context_obj_name = 'shift'
 
-class ShiftUpdate(SuccessMessageMixin, UpdateView):
+class ShiftAMUpdate(SuccessMessageMixin, UpdateView):
     model           = Shift
-    success_message = 'Shift Updated Successfully.'
+    form_class      = ShiftAMForm
+    success_message = 'AM Shift Updated Successfully.'
 
     def get_context_data(self, **kwargs):
-        context = super(ShiftUpdate, self).get_context_data(**kwargs)
-        if self.kwargs['time'] == 'PM':
-            context['title'] = 'Update PM Shift'
-            context['form']  = ShiftPMForm
-        else:
-            context['title'] ='Update AM Shift'
-            context['form']  = ShiftAMForm
+        context = super(ShiftAMUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit AM Shift'
         return context
 
-    def form_valid(self, form):
-        if self.request.method == 'POST':
-            form.instance.time_of_day == self.request.POST['time']
-        return super(ShiftUpdate, self).form_valid(form)
+class ShiftPMUpdate(SuccessMessageMixin, UpdateView):
+    model           = Shift
+    form_class      = ShiftPMForm
+    success_message = 'PM Shift Updated Successfully.'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShiftPMUpdate, self).get_context_data(**kwargs)
+        context['title'] = 'Edit PM Shift'
+        return context
 
 class ShiftDelete(SuccessMessageMixin, DeleteView):
     model       = Shift

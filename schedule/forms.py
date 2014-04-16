@@ -21,7 +21,7 @@ class ShiftAMForm(forms.ModelForm):
         self.helper.layout.append(form_actions)
     class Meta:
         model = Shift
-        exclude = ['open_haytrap','lights_off','created','modified']
+        exclude = ['open_haytrap','time_of_day','lights_off','created','modified']
 
 class ShiftPMForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

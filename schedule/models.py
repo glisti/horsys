@@ -21,4 +21,4 @@ class Shift(HorsysBaseModel):
 	lights_off    = models.BooleanField(default=False)
 
 	def get_absolute_url(self):
-		return reverse('shift_detail', kwargs={'time': self.time_of_day,'pk': self.pk})
+		return reverse('shift_detail', kwargs={'pk': self.pk})
