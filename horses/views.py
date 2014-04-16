@@ -8,8 +8,6 @@ from django.shortcuts import get_object_or_404
 from horses.models import Horse, MedicalRecord, Task, Log
 from horses.forms import HorseForm, MedicalRecordForm, TaskForm, LogForm
 
-from core.mixins import AjaxResponseMixin
-
 # ====================================================================
 # Horse
 # ====================================================================
