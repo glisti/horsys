@@ -18,7 +18,8 @@ DATABASES = {
 
 INSTALLED_APPS += (
     'horses',
-    'schedule'
+    'schedule',
+    'core',
 )
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
