@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^schedule/', include('schedule.urls')),
     url(r'^notify/', get_notify_pattern()),
-    url(r'^wiki/', get_wiki_pattern())
+    url(r'^wiki/', get_wiki_pattern()),
     url(r'^customers/', include('customers.urls')),
 )
 
