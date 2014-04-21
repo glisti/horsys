@@ -3,18 +3,17 @@ from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 
-from schedule.models import Shift
-from schedule.forms import ShiftAMForm, ShiftPMForm
+from schedule.models import Shift, Clock
+from schedule.forms import ShiftForm, ClockForm
 
 class ShiftList(ListView):
     model            = Shift
     context_obj_name = 'shift_list'
 
-class ShiftAMCreate(SuccessMessageMixin, CreateView):
-    model           = Shift
-    form_class      = ShiftAMForm
-    success_url     = reverse_lazy('shift_list')
-    success_message = 'AM Shift Created Successfully.'
+class ShiftCreate(CreateView):
+    model = Shift
+    form_class = ShiftForm
+    success_url = reverse_lazy('schedule_home')
 
     def get_context_data(self, **kwargs):
         context = super(ShiftAMCreate, self).get_context_data(**kwargs)
