@@ -46,7 +46,17 @@ class Clock(models.Model):
 	def is_today(self):
 		return self.date >= date.today()	
 	def get_absolute_url(self):
-		return reverse('clock_detail', kwargs={'pk': self.pk})	
+		return reverse('clock_detail', kwargs={'pk': self.pk})
+	def total_hours(self):
+		dm = self.log_out.minute - self.log_in.minute
+		if dm < 0:
+			dm = 60 - dm
+			dh = self.log_out.hour - self.log_in.hour
+			dh = dh - 1
+		else:
+			dh = self.log_out.hour - self.log_in.hour
+		total = float(dh + float(dm)/60)
+		return round(total,1)
 
 	def title(self):
 		return self.date.toordinal()	

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1>
+            <h1>
                     Clock Entries
                     <small>
                         <div class="pull-right">
@@ -21,13 +21,14 @@
                 </h1>
             </div>
         </div>
+    </div>
 
 {% for clock in clock_list %}
 	<div class="col-md-12">
 	    <h3>
 	        {{clock.date|date:"l F j"}}
 	        <small>
-	            - {{clock.log_in}} clock
+	            - {{clock.feeder_name}}
 	            <div class="pull-right">
 	                <a class="btn btn-default btn-sm" href="{% url "clock_detail" clock.id %}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
 	                <a class="btn btn-primary btn-sm" href="{% url "clock_update" clock.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -37,6 +38,18 @@
 	    </h3>
 	    <hr/>
 	</div>
+	<div class="col-md-6">
+	    <ul class="list-group">
+	    	<li class="list-group-item">Shift type:		{{ clock.shift_type }}</li>
+	    	<li class="list-group-item">Total hours:	{{ clock.total_hours }}</li>
+	    </ul>
+	</div>
+    <div class="col-md-6">
+    	<ul class="list-group">
+            <li class="list-group-item">Clock in time:	{{ clock.log_in }}</li>
+            <li class="list-group-item">Clock out time: {{ clock.log_out }}</li>
+    	</ul>
+    </div>
 {% endfor %}
 
 
