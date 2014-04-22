@@ -1,2 +1,1 @@
-{% load i18n %}
-{% blocktrans with site.name as site_name %}Your account was activated -- {{ site_name }}{% endblocktrans %}
+Your Horsys account was activated

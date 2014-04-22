@@ -1,17 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'registration_base.html' %}
 {% load url from future %}
-{% load i18n %}
+{% load crispy_forms_tags %}
 
-{% block title %}{% trans 'Registration' %}{% endblock %}
+{% block title %}Registration{% endblock %}
 
-{% block content_title %}<h1>{% trans 'Registration' %}</h1>{% endblock %}
+{% block content_header %}Horsys Registration{% endblock %}
 
-{% block content %}
+{% block body %}
 {{ block.super }}
-<p>{% trans 'Please fill the following fields to create your registration' %}</p>
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    {{ supplement_form.as_p }}
-    <p><input type="submit" value="{% trans 'Register' %}"></p>
+<p><em>Please provide a username and email to register.</em></p>
+<form class="well" action="" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    {{ supplement_form|crispy }}
+    <button class="btn btn-success" type="submit">Register</button>
 </form>
 {% endblock %}

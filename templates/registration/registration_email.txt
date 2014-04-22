@@ -1,7 +1,7 @@
-{% load url from future %}
-{% load i18n %}
-{% blocktrans %}Dear {{ user }},{% endblocktrans %}
-{% trans 'Your account registration was created successfully.' %}
+Dear {{ user }},
+You have successfully registered with Horsys!
 
-{% trans 'Please wait until the inspector verify your registration.' %}
-{% trans 'You will receive an acceptance or rejection email within several days.' %}
+The Manager will review your registration and you will be accepted or rejected
+within the next couple of days.
+
+{% include 'email_footer.txt' %}

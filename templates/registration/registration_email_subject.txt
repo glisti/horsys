@@ -1,2 +1,1 @@
-{% load i18n %}
-{% blocktrans with site.name as site_name %}Your registration was created -- {{ site_name }}{% endblocktrans %}
+Your Horsys registration was created

@@ -16,11 +16,11 @@ DATABASES = {
         'PORT': '',
         'USER': '',
         'PASSWORD': ''
+    },
+    'default_lite': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'horsys.db'),
     }
-    # 'default_lite': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'horsys.db'),
-    # }
 }
 
 INSTALLED_APPS += (

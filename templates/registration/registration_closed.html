@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'registration_base.html' %}
 {% load url from future %}
-{% load i18n %}
 
-{% block title %}{% trans 'Registration is closed' %}{% endblock %}
+{% block title %}Registration is closed{% endblock %}
 
-{% block content_title %}<h1>{% trans 'Registration is closed' %}</h1>{% endblock %}
+{% block content_header %}Registration is Closed{% endblock %}
 
-{% block content %}
-{{ block.super }}
-<p>{% trans 'I am afraid that registration is currently closed.' %}</p>
+{% block body %}
+    {{ block.super }}
+    <p>I am afraid that Horsys registration is currently closed.</p>
+    <p>Please try again at another time.</p>
 {% endblock %}

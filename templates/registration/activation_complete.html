@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'registration_base.html' %}
 {% load url from future %}
-{% load i18n %}
 
-{% block title %}{% trans 'Activation was complete' %}{% endblock %}
+{% block title %}Activation Complete{% endblock %}
 
-{% block content_title %}<h1>{% trans 'Activation was complete' %}</h1>{% endblock %}
+{% block content_header %}Activation Complete!{% endblock %}
 
-{% block content %}
+{% block body %}
 {{ block.super }}
-<p>{% trans 'Your account was activated' %}</p>
+<p>Your account was activated, please login in and begin using Horsys.</p>
 {% endblock %}
