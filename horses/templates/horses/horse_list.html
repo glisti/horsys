@@ -1,5 +1,6 @@
 {% extends 'horse_base.html' %}
 {% block title %}Registered Horses{% endblock %}
+{% load tz %}
 {% block content %}
     <div class="row">
         <div class="col-md-12">
@@ -13,13 +14,15 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#FeedingTable" data-toggle="tab">FeedingTable</a></li>
+                <li class="active"><a href="#FeedingTable" data-toggle="tab">Feeding Table</a></li>
                 <li><a href="#Horses" data-toggle="tab">Horses</a></li>
+                <li><a href="#Tasks" data-toggle="tab">Tasks</a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane active" id="FeedingTable">
+                    <br/>
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -79,6 +82,31 @@
                     </ul>
                 {% empty %}
                     <p><em>There are 0 horses in the database...</em></p>
+                {% endfor %}
+                </div>
+                <div class="tab-pane" id="Tasks">
+                    <br/>
+                {% for task in tasks %}
+                    {% if task.completed %}
+                        <div class="alert alert-success"><strong>{{task.horse.name}}</strong> completed this task as of {{task.modified|timezone:'America/Chicago'}}</div>
+                    {% else %}
+                        <div class="alert alert-danger"><strong>{{task.horse.name}}</strong> needs to complete this task.</div>
+                    {% endif %}
+                    <h3>
+                        {{task.created|timezone:'America/Chicago'}}
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-sm" href="{% url "task_detail" task.id %}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+                            <a class="btn btn-info btn-sm" href="{% url "task_update" task.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url "task_delete" task.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                        </div>
+                    </h3>
+                    <h3>Program</h3>
+                    <p>{{task.program}}</p>
+                    <h3>Task</h3>
+                    <p>{{task.task}}</p>
+                    <hr/>
+                {% empty %}
+                    <p><em>{{horse.name}} has no tasks.</em></p>
                 {% endfor %}
                 </div>
             </div>

@@ -107,7 +107,6 @@
                             <em>{{log.created|timezone:'America/Chicago'}}</em><a data-toggle="tooltip" title="delete" class="btn btn-default btn-xs pull-right" href="{% url "log_delete" log.id  %}"><span class="glyphicon glyphicon-remove"></span></a>
                             <hr/>
                             <strong>Injuries</strong>
-                            <p>{{log.injuries}}</p>
                             <p>{% if log.injuries %}{{log.injuries}} {% else %} No changes.{% endif %}</p>
                             <strong>Behavior Changes</strong>
                             <p>{% if log.behavior_changes %}{{log.behavior_changes}} {% else %} No changes.{% endif %}</p>

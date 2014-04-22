@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
-from schedule.views import (ShiftList, ShiftCreate,
-                            ShiftDetail, ShiftDelete, ScheduleHome,
-                            ClockList, ClockCreate, ClockDetail, ClockDelete)
+from schedule.views import (ShiftList, ShiftAMCreate, ShiftPMCreate,
+                            ShiftAMUpdate, ShiftPMUpdate,
+                            ShiftDetail, ShiftDelete)
+                            # ScheduleHome,
+                            # ClockList, ClockCreate, ClockDetail, ClockDelete)
 
 urlpatterns = patterns('',
     url(r'^shifts/$', ShiftList.as_view(), name='shift_list'),
