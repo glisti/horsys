@@ -1,11 +1,18 @@
 {% extends "schedule_base.html" %}
 {% block title %} Shifts {% endblock title %}
 {% block content %}
+<ul class="nav nav-tabs">
+    <li ><a href=" {% url "schedule_home" %} ">Home</a></li>
+    <li class="active"><a href=" {% url "shift_list" %} ">Shifts</a></li>
+    <li  ><a href=" {% url "clock_list" %} ">Clock Data</a></li>
+</ul>
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
                 <h1>
-                    Recent Shiftsk
+                    Recent Shifts
                     <small>
                         <div class="pull-right">
                             <a class="btn btn-info btn-sm" href="{% url "shiftam_create" %}"><span class="glyphicon glyphicon-plus"></span> New AM Shift</a>

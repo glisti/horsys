@@ -1,0 +1,33 @@
+{% extends 'schedule_base.html' %}
+{% block title %}Clock In and Out{% endblock title %}
+{% block content %}
+
+<head>
+<style type="text/css">
+table
+{
+    width:200px;
+    font-size: 13pt;
+    margin:0px;
+    border-collapse: serparate;
+}
+button
+{
+    width:100px;
+}
+</style>
+</head>
+
+<table align="left">
+<tr>
+<td> {{clock.feeder_name}}</td>
+</tr>
+</table>
+
+
+<div class="pull-right">
+    <a class="btn btn-info btn-sm" href="{% url "clock_update" clock.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+    <a class="btn btn-danger btn-sm" href="{% url "clock_delete" clock.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+</div>
+
+{% endblock content %}

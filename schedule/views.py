@@ -3,8 +3,8 @@ from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 
-from schedule.models import Shift
-from schedule.forms import ShiftAMForm, ShiftPMForm
+from schedule.models import Shift, Clock
+from schedule.forms import ShiftAMForm, ShiftPMForm, ClockForm
 
 class ShiftList(ListView):
     model            = Shift
@@ -67,3 +67,30 @@ class ShiftPMUpdate(SuccessMessageMixin, UpdateView):
 class ShiftDelete(SuccessMessageMixin, DeleteView):
     model       = Shift
     success_url = reverse_lazy('shift_list')
+
+class ScheduleHome(ListView):
+    model = Shift
+    context_obj_name = 'shift'
+    template_name = "schedule/schedule_home.html"
+
+class ClockList(ListView):
+    model = Clock
+    context_obj_name = 'clock_list'
+
+class ClockCreate(CreateView):
+    model = Clock
+    form_class = ClockForm
+    success_url = reverse_lazy('schedule_home')
+
+class ClockDetail(DetailView):
+    model = Clock
+    context_obj_name = 'clock'
+
+class ClockUpdate(UpdateView):
+    model = Clock
+    form_class = ClockForm
+    context_obj_name = 'clocks'
+
+class ClockDelete(DeleteView):
+    model = Clock
+    success_url = reverse_lazy('schedule_home')

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Shift List{% endblock %}
+{% block content %}
+
+<ul class="nav nav-tabs">
+    <li ><a href=" {% url "schedule_home" %} ">Home</a></li>
+    <li><a href=" {% url "shift_list" %} ">Shifts</a></li>
+    <li class="active" ><a href=" {% url "clock_list" %} ">Clock Data</a></li>
+</ul>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>
+                    Clock Entries
+                    <small>
+                        <div class="pull-right">
+                            <a class="btn btn-info btn-sm" href="{% url "clock_create" %}"><span class="glyphicon glyphicon-plus"></span> New Clock Entry</a>
+                        </div>
+                    </small>
+                </h1>
+            </div>
+        </div>
+
+{% for clock in clock_list %}
+	<div class="col-md-12">
+	    <h3>
+	        {{clock.date|date:"l F j"}}
+	        <small>
+	            - {{clock.log_in}} clock
+	            <div class="pull-right">
+	                <a class="btn btn-default btn-sm" href="{% url "clock_detail" clock.id %}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+	                <a class="btn btn-primary btn-sm" href="{% url "clock_update" clock.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+	                <a class="btn btn-danger btn-sm" href="{% url "clock_delete" clock.id %}"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+	            </div>
+	        </small>
+	    </h3>
+	    <hr/>
+	</div>
+{% endfor %}
+
+
+{% endblock content %}

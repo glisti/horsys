@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
-
+import time
+from datetime import date, datetime, timedelta
 from core.models import HorsysBaseModel
 
 TIME_CHOICES = (
@@ -22,3 +23,30 @@ class Shift(HorsysBaseModel):
 
 	def get_absolute_url(self):
 		return reverse('shift_detail', kwargs={'pk': self.pk})
+
+
+class Clock(models.Model):
+	AM_SHIFT = 'AM'
+	PM_SHIFT = 'PM'
+	SHIFT_CHOICES = (
+		(AM_SHIFT, 'Morning Shift'),
+		(PM_SHIFT, 'Evening Shift'),
+
+		)
+	feeder_name = models.CharField(max_length=100)
+	shift_type = models.CharField(max_length=2,
+								  choices=SHIFT_CHOICES,
+								  default=AM_SHIFT)
+	date = models.DateField(default=datetime.now() - timedelta(hours=5))
+	log_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
+	log_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
+	def __unicode__(self):
+		return self.feeder_name
+	
+	def is_today(self):
+		return self.date >= date.today()	
+	def get_absolute_url(self):
+		return reverse('clock_detail', kwargs={'pk': self.pk})	
+
+	def title(self):
+		return self.date.toordinal()	

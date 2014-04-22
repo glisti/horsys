@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Schedule Home{% endblock %}
+{% block content %}
+{% load staticfiles %}
+<head>
+<style type="text/css">
+table
+{
+    width:200px;
+    font-size: 13pt;
+    margin:0px;
+    border-collapse: serparate;
+}
+</style>
+</head>
+<ul class="nav nav-tabs">
+    <li class="active"><a href=" {% url "schedule_home" %} ">Home</a></li>
+    <li><a href=" {% url "shift_list" %} ">Shifts</a></li>
+    <li><a href=" {% url "clock_list" %} ">Clock Data</a></li>
+</ul>
+
+<h1> Schedule Home </h1>
+<!--
+<div align="left">
+<div class="btn-group-horizontal">
+    <div class="btn-group btn-group-lg">
+    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+        Create Shift
+        <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a class="btn  btn-lg" href="{% url "shiftam_create" %}"><span class="glyphicon glyphicon-plus"></span> New AM Shift</a></li>
+            <li><a class="btn  btn-lg" href="{% url "shiftpm_create" %}"><span class="glyphicon glyphicon-plus"></span> New PM Shift</a></li>
+        </ul>
+    </div>
+    <a class="btn btn-info btn-lg" href="{% url "clock_create" %}"><span class="glyphicon glyphicon-plus"></span>New Clock Entry</a>
+</div>
+</div>
+-->
+<div align="right">
+    <iframe src="https://www.google.com/calendar/embed?src=horsyscalendar%40gmail.com&ctz=Europe/Stockholm" style="border: 2" width="1200" height="900" frameborder="0" scrolling="no" align"middle"></iframe>
+</div>
+{% endblock content %}

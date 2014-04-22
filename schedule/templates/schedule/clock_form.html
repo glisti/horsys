@@ -1,0 +1,9 @@
+{% extends 'schedule_base.html' %}
+{% block title %}Clock in and out{% endblock title %}
+{% block content %}
+    <div class="page-header">
+        <h1>{{title}}</h1>
+    </div>
+    {% load crispy_forms_tags %}
+    {% crispy form %}
+{% endblock content %}
