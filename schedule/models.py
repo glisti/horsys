@@ -20,11 +20,24 @@ class Shift(HorsysBaseModel):
 	clean_stalls  = models.BooleanField(default=False)
 	tidy_barn     = models.BooleanField(default=False)
 	lights_off    = models.BooleanField(default=False)
+	clock_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
+	clock_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
 
 	def get_absolute_url(self):
 		return reverse('shift_detail', kwargs={'pk': self.pk})
+	def total_hours(self):
+		dm = self.clock_out.minute - self.clock_in.minute
+		if dm < 0:
+			dm = 60 - dm
+			dh = self.clock_out.hour - self.clock_in.hour
+			dh = dh - 1
+		else:
+			dh = self.clock_out.hour - self.clock_in.hour
+		total = float(dh + float(dm)/60)
+		return round(total,1)
 
 
+'''
 class Clock(models.Model):
 	AM_SHIFT = 'AM'
 	PM_SHIFT = 'PM'
@@ -59,4 +72,5 @@ class Clock(models.Model):
 		return round(total,1)
 
 	def title(self):
-		return self.date.toordinal()	
+		return self.date.toordinal()
+		'''

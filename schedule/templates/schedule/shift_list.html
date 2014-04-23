@@ -2,9 +2,8 @@
 {% block title %} Shifts {% endblock title %}
 {% block content %}
 <ul class="nav nav-tabs">
-    <li ><a href=" {% url "schedule_home" %} ">Home</a></li>
+    <li ><a href=" {% url "schedule_home" %} ">Calendar</a></li>
     <li class="active"><a href=" {% url "shift_list" %} ">Shifts</a></li>
-    <li  ><a href=" {% url "clock_list" %} ">Clock Data</a></li>
 </ul>
 
 
@@ -27,7 +26,7 @@
                 <h3>
                     {{shift.created|date:"l F j"}}
                     <small>
-                        - {{shift.time_of_day}} shift
+                        - {{shift.time_of_day}} shift for {{shift.feeder_name}}
                         <div class="pull-right">
                             <a class="btn btn-default btn-sm" href="{% url "shift_detail" shift.id %}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
                         {% if shift.time_of_day == "AM" %}
@@ -41,15 +40,22 @@
                 </h3>
                 <hr/>
             </div>
+            <div class="col-md-4">
+                <ul>
+                    <li class="list-group-item">Clock in     : {{shift.clock_in}}</li>
+                    <li class="list-group-item">Clock out    : {{shift.clock_out}}</li>
+                    <li class="list-group-item">Total hours  : {{shift.total_hours}}</li>
+                </ul>
+            </div>
             {% if shift.time_of_day == 'AM' %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <ul class="list-group">
                         <li class="list-group-item {% if shift.turn_out %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Turn Out</li>
                         <li class="list-group-item {% if shift.refill_water %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Refill Water</li>
                         <li class="list-group-item {% if shift.feed_horses %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Feed Horses</li>
                     </ul>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <ul class="list-group">
                         <li class="list-group-item {% if shift.close_haytrap %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Close Haytrap</li>
                         <li class="list-group-item {% if shift.clean_stalls %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Clean Stalls</li>
@@ -57,7 +63,7 @@
                     </ul>
                 </div>
             {% else %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <ul class="list-group">
                         <li class="list-group-item {% if shift.turn_out %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Turn Out</li>
                         <li class="list-group-item {% if shift.refill_water %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Refill Water</li>
@@ -65,7 +71,7 @@
                         <li class="list-group-item {% if shift.open_haytrap %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Open Haytrap</li>
                     </ul>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <ul class="list-group">
                         <li class="list-group-item {% if shift.clean_stalls %}list-group-item-success{% else %}list-group-item-danger{% endif %}">CLean Stalls</li>
                         <li class="list-group-item {% if shift.tidy_barn %}list-group-item-success{% else %}list-group-item-danger{% endif %}">Tidy Barn</li>

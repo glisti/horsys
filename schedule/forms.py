@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from crispy_forms.bootstrap import FormActions
 from django.forms import extras
-from schedule.models import Shift, Clock
+from schedule.models import Shift#, Clock
 
 from select_time_widget import SelectTimeWidget
 import time
@@ -26,6 +26,10 @@ class ShiftAMForm(forms.ModelForm):
     class Meta:
         model = Shift
         exclude = ['open_haytrap','time_of_day','lights_off','created','modified']
+        widgets = {
+        'clock_in': SelectTimeWidget(twelve_hr=True),
+        'clock_out': SelectTimeWidget(twelve_hr=True),
+        }
 
 class ShiftPMForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -38,8 +42,13 @@ class ShiftPMForm(forms.ModelForm):
     class Meta:
         model = Shift
         exclude = ['open_haytrap','time_of_day','created', 'modified']
+        widgets = {
+        'log_in': SelectTimeWidget(twelve_hr=True),
+        'log_out': SelectTimeWidget(twelve_hr=True),
+        }
 
 
+'''
 class ClockForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ClockForm, self).__init__(*args, **kwargs)
@@ -56,3 +65,4 @@ class ClockForm(forms.ModelForm):
         'log_in': SelectTimeWidget(twelve_hr=True),
         'log_out': SelectTimeWidget(twelve_hr=True),
         }
+'''
