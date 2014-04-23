@@ -1,6 +1,6 @@
 Dear {{ user }},
-You have successfully registered with Horsys!
 
+You have successfully registered with Horsys!
 The Manager will review your registration and you will be accepted or rejected
 within the next couple of days.
 
