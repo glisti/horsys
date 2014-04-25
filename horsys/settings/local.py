@@ -18,6 +18,7 @@ DATABASES = {
 INSTALLED_APPS += (
     'horses',
     'schedule',
+	'customers',
     'debug_toolbar',
     'autofixture',
     'dev',
