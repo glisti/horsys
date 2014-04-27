@@ -1,0 +1,25 @@
+{% load url from future %}
+Dear {{ user }},
+{% if is_generated %}
+    {% with site.name as site_name %}Your Horsys account was activated!{% endwith %}
+
+    The password of your account was generated automatically and diplayed below.
+    Please click the following url to login.
+    It is strongly recommended that you change your initial password to something more secure.
+
+    ** Your account information **
+    USERNAME: {{ user }}
+    PASSWORD: {{ password }}
+
+    http://{{ site.domain }}{% url 'auth_login' %}
+{% else %}
+    {% with site.name as site_name %}Your Horsys account was successfully activated{% endwith %}
+
+    Please click the following url to login.
+
+    ** Your account information **
+    USERNAME: {{ user }}
+
+    http://{{ site.domain }}{% url 'auth_login' %}
+{% endif %}
+{% include 'registration/email_footer.txt' %}

@@ -1,0 +1,11 @@
+{% load url from future %}
+Dear {{ user }},
+
+I am afraid that your Horsys account registration was rejected by the manager.
+{% if message %}
+
+    'Rejection reasons:
+    {{ message }}
+{% endif %}
+
+{% include 'registration/email_footer.txt' %}

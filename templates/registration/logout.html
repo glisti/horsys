@@ -1,0 +1,12 @@
+{% extends 'registration/splash_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Horsys Logged Out
+{% endblock title %}
+{% block content_header %}
+    <h1>Goodbye!</h1>
+{% endblock content_header %}
+{% block content %}
+    <div class="alert alert-success"><strong>Success!</strong> You have been logged out of Horsys.</div>
+    <a class="btn btn-primary btn-lg btn-block" href="{% url "auth_login" %}">Log Back In</a>
+{% endblock content %}

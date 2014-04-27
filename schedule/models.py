@@ -3,6 +3,9 @@ from django.db import models
 import time
 from datetime import date, datetime, timedelta
 from core.models import HorsysBaseModel
+import time
+from datetime import date, datetime, timedelta
+from django.contrib.admin.widgets import AdminDateWidget
 
 TIME_CHOICES = (
 	('AM', 'AM'),
@@ -23,21 +26,18 @@ class Shift(HorsysBaseModel):
 	clock_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
 	clock_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
 
+	def __unicode__(self):
+		return self.feeder_name
+
+	def is_today(self):
+		return self.date >= date.today()
+
 	def get_absolute_url(self):
 		return reverse('shift_detail', kwargs={'pk': self.pk})
-	def total_hours(self):
-		dm = self.clock_out.minute - self.clock_in.minute
-		if dm < 0:
-			dm = 60 - dm
-			dh = self.clock_out.hour - self.clock_in.hour
-			dh = dh - 1
-		else:
-			dh = self.clock_out.hour - self.clock_in.hour
-		total = float(dh + float(dm)/60)
-		return round(total,1)
 
+	def title(self):
+		return self.date.isoformat()
 
-'''
 class Clock(models.Model):
 	AM_SHIFT = 'AM'
 	PM_SHIFT = 'PM'
@@ -50,27 +50,16 @@ class Clock(models.Model):
 	shift_type = models.CharField(max_length=2,
 								  choices=SHIFT_CHOICES,
 								  default=AM_SHIFT)
-	date = models.DateField(default=datetime.now() - timedelta(hours=5))
-	log_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
-	log_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
+	date = models.DateField()
+	log_in = models.TimeField()
+	log_out = models.TimeField()
 	def __unicode__(self):
 		return self.feeder_name
 	
 	def is_today(self):
 		return self.date >= date.today()	
 	def get_absolute_url(self):
-		return reverse('clock_detail', kwargs={'pk': self.pk})
-	def total_hours(self):
-		dm = self.log_out.minute - self.log_in.minute
-		if dm < 0:
-			dm = 60 - dm
-			dh = self.log_out.hour - self.log_in.hour
-			dh = dh - 1
-		else:
-			dh = self.log_out.hour - self.log_in.hour
-		total = float(dh + float(dm)/60)
-		return round(total,1)
+		return reverse('clock_detail', kwargs={'pk': self.pk})	
 
 	def title(self):
-		return self.date.toordinal()
-		'''
+		return self.date.toordinal()	

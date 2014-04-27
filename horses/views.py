@@ -16,6 +16,11 @@ class HorseList(ListView):
     model            = Horse
     context_obj_name = 'horse_list'
 
+    def get_context_data(self, **kwargs):
+        context = super(HorseList, self).get_context_data(**kwargs)
+        context['tasks'] = Task.objects.filter(completed=False)
+        return context
+
 class HorseCreate(SuccessMessageMixin, CreateView):
     model           = Horse
     form_class      = HorseForm
@@ -33,7 +38,7 @@ class HorseDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(HorseDetail, self).get_context_data(**kwargs)
         context['tasks']   = Task.objects.filter(horse_id__exact=self.object.id)
-        context['logs']   = Log.objects.filter(horse_id__exact=self.object.id)
+        context['logs']    = Log.objects.filter(horse_id__exact=self.object.id)
         context['records'] = MedicalRecord.objects.filter(horse_id__exact=self.object.id)
         return context
 

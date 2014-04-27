@@ -1,0 +1,11 @@
+{% extends 'registration/registration_base.html' %}
+{% load url from future %}
+
+{% block title %}Activation Complete{% endblock %}
+
+{% block content_header %}Activation Complete!{% endblock %}
+
+{% block body %}
+{{ block.super }}
+<p><em>Your account was activated, please <a href="{% url 'auth_login' %}">login</a> and begin using Horsys!</em></p>
+{% endblock %}

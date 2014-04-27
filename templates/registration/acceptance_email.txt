@@ -1,0 +1,12 @@
+{% load url from future %}
+Dear {{ user }},
+
+You have been successfully registered with Horsys.
+
+Please click the following url and set your account password to finish activation.
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key=activation_key %}
+
+The activation link above will expire in {{ expiration_days }} days.
+
+{% include 'registration/email_footer.txt' %}

@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^notify/', get_notify_pattern()),
     url(r'^wiki/', get_wiki_pattern()),
     url(r'^customers/', include('customers.urls')),
+    url('^registration/', include('registration.urls')),
 )
 
 from django.conf import settings

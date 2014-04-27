@@ -1,0 +1,17 @@
+{% extends 'registration/registration_base.html' %}
+{% load url from future %}
+{% load crispy_forms_tags %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content_header %}Horsys Registration{% endblock %}
+
+{% block body %}
+{{ block.super }}
+<p><em>Please provide a username and email to register.</em></p>
+<form class="well" action="" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    {{ supplement_form|crispy }}
+    <button class="btn btn-success" type="submit">Register</button>
+</form>
+{% endblock %}
