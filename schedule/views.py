@@ -3,8 +3,8 @@ from django.views.generic import ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 
-from schedule.models import Shift, Clock
-from schedule.forms import ShiftAMForm, ShiftPMForm, ClockForm
+from schedule.models import Shift
+from schedule.forms import ShiftAMForm, ShiftPMForm
 
 class ShiftList(ListView):
     model            = Shift
