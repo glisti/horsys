@@ -22,4 +22,4 @@ Dear {{ user }},
 
     http://{{ site.domain }}{% url 'auth_login' %}
 {% endif %}
-{% include 'email_footer.txt' %}
+{% include 'registration/email_footer.txt' %}

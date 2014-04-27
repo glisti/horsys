@@ -9,4 +9,4 @@ http://{{ site.domain }}{% url 'registration_activate' activation_key=activation
 
 The activation link above will expire in {{ expiration_days }} days.
 
-{% include 'email_footer.txt' %}
+{% include 'registration/email_footer.txt' %}

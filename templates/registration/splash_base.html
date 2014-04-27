@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style>
+        body {
+          padding-top: 70px;
+          padding-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="page-header">
+                    {% block content_header %}{% endblock content_header %}
+                </div>
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,4 +8,4 @@ I am afraid that your Horsys account registration was rejected by the manager.
     {{ message }}
 {% endif %}
 
-{% include 'email_footer.txt' %}
+{% include 'registration/email_footer.txt' %}

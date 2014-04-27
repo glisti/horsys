@@ -24,11 +24,14 @@ ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
 
+# User URLs
+LOGIN_URL = 'registration/login'
+
+LOGIN_REDIRECT_URL = '/'
+
 # Application definition
 
 INSTALLED_APPS = (
-    # 'django_admin_bootstrapped.bootstrap3',
-    # 'django_admin_bootstrapped',
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',

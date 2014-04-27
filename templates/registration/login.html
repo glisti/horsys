@@ -1,0 +1,17 @@
+{% extends 'registration/splash_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Horsys Login
+{% endblock title %}
+{% block content_header %}
+    <h1>Horsys Login</h1>
+{% endblock content_header %}
+{% block content %}
+<form class="well" method="post" action=".">{% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Log in" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+<p><a href="{% url 'registration_register' %}">Register</a> |
+   <a href="{% url 'password_reset' %}">Forgot your password?</a> </p>
+{% endblock content %}
