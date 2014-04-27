@@ -9,7 +9,7 @@ WSGI_APPLICATION = 'horsys.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'psql': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'horsys',
         'HOST': 'localhost',
@@ -17,7 +17,7 @@ DATABASES = {
         'USER': '',
         'PASSWORD': ''
     },
-    'default': {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'horsys.db'),
     }

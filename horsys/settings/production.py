@@ -20,6 +20,7 @@ INSTALLED_APPS += (
     'horses',
     'schedule',
     'core',
+    'registration',
 )
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
