@@ -25,9 +25,11 @@ ALLOWED_HOSTS = ['*']
 SITE_ID = 1
 
 # User URLs
-LOGIN_URL = 'registration/login'
+LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_URL = '/logout/'
 
 # Application definition
 
@@ -86,6 +88,13 @@ USE_L10N      = True
 
 USE_TZ        = True
 
+# SMTP
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'horsys.staff@gmail.com'
+EMAIL_HOST_PASSWORD = 'horsysstaff'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
