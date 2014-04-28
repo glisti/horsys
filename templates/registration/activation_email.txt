@@ -14,7 +14,6 @@ Dear {{ user }},
     http://{{ site.domain }}{% url 'auth_login' %}
 {% else %}
     {% with site.name as site_name %}Your Horsys account was successfully activated{% endwith %}
-
     Please click the following url to login.
 
     ** Your account information **
