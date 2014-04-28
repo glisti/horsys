@@ -26,7 +26,7 @@ class ShiftAMForm(forms.ModelForm):
         self.helper.layout.append(form_actions)
     class Meta:
         model = Shift
-        exclude = ['open_haytrap','time_of_day','lights_off','created','modified']
+        exclude = ['open_haytrap','time_of_day','lights_off','created','modified', 'user']
         widgets = {
         'clock_in': SelectTimeWidget(twelve_hr=True),
         'clock_out': SelectTimeWidget(twelve_hr=True),
@@ -42,7 +42,7 @@ class ShiftPMForm(forms.ModelForm):
         self.helper.layout.append(form_actions)
     class Meta:
         model = Shift
-        exclude = ['open_haytrap','time_of_day','created', 'modified']
+        exclude = ['open_haytrap','time_of_day','created', 'modified', 'user']
         widgets = {
         'log_in': SelectTimeWidget(twelve_hr=True),
         'log_out': SelectTimeWidget(twelve_hr=True),

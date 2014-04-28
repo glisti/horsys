@@ -19,10 +19,12 @@ class ShiftAMCreate(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ShiftAMCreate, self).get_context_data(**kwargs)
         context['title'] = 'Add a New AM Shift'
+        context.update({ 'request':self.request })
         return context
 
     def form_valid(self, form):
         form.instance.time_of_day = 'AM'
+        form.instance.user = self.request.user.username
         return super(ShiftAMCreate, self).form_valid(form)
 
 class ShiftPMCreate(SuccessMessageMixin, CreateView):
@@ -34,10 +36,12 @@ class ShiftPMCreate(SuccessMessageMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super(ShiftPMCreate, self).get_context_data(**kwargs)
         context['title'] = 'Add a New PM Shift'
+        context.update({ 'request':self.request })
         return context
 
     def form_valid(self, form):
         form.instance.time_of_day = 'PM'
+        form.instance.user = self.request.user.username
         return super(ShiftPMCreate, self).form_valid(form)
 
 class ShiftDetail(DetailView):
