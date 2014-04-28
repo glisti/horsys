@@ -27,13 +27,11 @@ INSTALLED_APPS += (
     'core',
     'horses',
     'schedule',
-<<<<<<< HEAD
+    'customers',
+
     'registration',
     'registration.contrib.notification',
 
-=======
-	'customers',
->>>>>>> origin/justin
     'debug_toolbar',
     'autofixture',
     'dev',
