@@ -28,6 +28,7 @@ INSTALLED_APPS += (
     'horses',
     'schedule',
     'registration',
+    'registration.contrib.notification',
 
     'debug_toolbar',
     'autofixture',

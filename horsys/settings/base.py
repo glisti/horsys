@@ -20,6 +20,8 @@ PROJECT_DIR = os.path.dirname(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'o_asryzz+d8+ut7aukg1=&&8wrmi8lb-ru-70k1ln#5i0yexxq'
 
+ADMINS = (('horsys staff','horsys.staff@gmail.com'),)
+
 ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
