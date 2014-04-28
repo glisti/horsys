@@ -44,7 +44,8 @@ class BoardersForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = ''
         self.helper.form_class  = 'well form-vertical'
-        self.helper.add_input(Submit('submit','submit'))
+        self.helper.layout.append(form_actions)
+        #self.helper.add_input(Submit('submit','submit'))
 
     class Meta:
         model = Boarders
@@ -56,7 +57,8 @@ class OwnersForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = ''
         self.helper.form_class  = 'well form-vertical'
-        self.helper.add_input(Submit('submit','submit'))
+        self.helper.layout.append(form_actions)
+        #self.helper.add_input(Submit('submit','submit'))
 
     class Meta:
         model = Owners

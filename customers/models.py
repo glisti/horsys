@@ -35,7 +35,7 @@ class Boarders(models.Model):
 	boarder = models.CharField(max_length=100)
 	checks_paid = models.CharField(max_length=100)
 	#contact_info = models.OneToOneField(ContactInfo)
-	liab_waivers = models.CharField(max_length=100)
+	liab_waivers =  models.CharField(max_length=100) #models.FileField(upload_to='customers/records')
 
 	def __unicode__(self): 
 		return self.boarder

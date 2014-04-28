@@ -5,7 +5,9 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from customers.models import ContactInfo, Boarders, Owners
 from customers.forms import ContactInfoForm, BoardersForm, OwnersForm, OwnerContactInfoForm
 
-
+# ====================================================================
+# Contact Information (Owner and Boarder)
+# ====================================================================
 class ContactInfoList(ListView):
     model = ContactInfo
     context_obj_name = 'contact_list'
@@ -20,6 +22,7 @@ class ContactInfoCreate(CreateView):
 
 class ContactInfoUpdate(UpdateView):
     model = ContactInfo
+    form_class       = OwnerContactInfoForm
     context_obj_name = 'customers'
     def get_context_data(self, **kwargs):
         context = super(ContactInfoUpdate, self).get_context_data(**kwargs)
@@ -29,6 +32,8 @@ class ContactInfoUpdate(UpdateView):
 class ContactInfoDelete(DeleteView):
     model = ContactInfo
     success_url = reverse_lazy('contact_list')
+
+
 
 class OwnerContactInfoList(ListView):
     model = ContactInfo
@@ -44,7 +49,9 @@ class OwnerContactInfoCreate(CreateView):
 
 class OwnerContactInfoUpdate(UpdateView):
     model = ContactInfo
+    form_class = OwnerContactInfoForm
     context_obj_name = 'customers'
+    success_url = reverse_lazy('owner_list')
     def get_context_data(self, **kwargs):
         context = super(OwnerContactInfoUpdate, self).get_context_data(**kwargs)
         context['contacts'] = 'Edit %s\'s  Contact Information' % self.object.owner_name.owner
@@ -52,12 +59,14 @@ class OwnerContactInfoUpdate(UpdateView):
 
 class OwnerContactInfoDelete(DeleteView):
     model = ContactInfo
-    success_url = reverse_lazy('contact_list')
+    success_url = reverse_lazy('owner_list')
 
 
 
 
-
+# ====================================================================
+# Owners
+# ====================================================================
 
 
 class OwnersList(ListView):
@@ -80,13 +89,18 @@ class OwnersDetail(DetailView):
 
 class OwnersUpdate(UpdateView):
     model = Owners
+    form_class       = OwnersForm
     context_obj_name = 'customers'
+    success_url = reverse_lazy('owner_list')
+
 
 class OwnersDelete(DeleteView):
     model = Owners
     success_url = reverse_lazy('owner_list')
 
-
+# ====================================================================
+# Boarders
+# ====================================================================
 class BoardersList(ListView):
     model = Boarders
     context_obj_name = 'boarder_list'
@@ -106,8 +120,13 @@ class BoardersDetail(DetailView):
 
 class BoardersUpdate(UpdateView):
     model = Boarders
+    form_class       = BoardersForm
     context_obj_name = 'customers'
-    
+    success_url = reverse_lazy('boarder_list')
+    def get_context_data(self, **kwargs):
+        context = super(BoardersUpdate, self).get_context_data(**kwargs)
+        context['contacts'] = ContactInfo.objects.filter(boarder_name_id__exact=self.object.id)
+        return context
 
 class BoardersDelete(DeleteView):
     model = Boarders

@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Boarder List{% endblock %}
 {% block content %}
-    <div class="row">
-        <h1>Customers</h1>
-    </div>
+    <h1>Customers</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href=" {% url "boarder_list" %} ">Boarders</a></li>
+        <li ><a href=" {% url "owner_list" %} ">Owners</a></li>
+    </ul>
+    
 	<div class="row">
         <div class="pull-right">
             <a class="btn btn-primary" href="{% url "boarder_create" %}">Add Boarder</a>
@@ -11,7 +14,6 @@
     </div>
     <div class="row">
     </div>
-    <h2>Boarder List<h2>
     {% for boarder in boarders_list %}
         <div class="row">
             <h3><a href="{% url "boarder_detail" boarder.id %}">{{ boarder.boarder}}</a></h3>
