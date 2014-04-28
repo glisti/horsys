@@ -21,6 +21,7 @@ INSTALLED_APPS += (
     'schedule',
     'core',
     'registration',
+    'registration.contrib.notification',
 )
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()

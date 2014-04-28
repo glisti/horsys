@@ -68,8 +68,8 @@ class Task(HorsysBaseModel):
 
 class Log(HorsysBaseModel):
     horse            = models.ForeignKey('Horse')
-    injuries         = models.TextField(max_length=100,blank=True)
-    behavior_changes = models.TextField(max_length=100,blank=True)
-    feed_changes     = models.TextField(max_length=100,blank=True)
-    comments         = models.TextField(max_length=100,blank=True)
+    injuries         = models.TextField(max_length=100, default='None', blank=True)
+    behavior_changes = models.TextField(max_length=100, default='None', blank=True)
+    feed_changes     = models.TextField(max_length=100, default='None', blank=True)
+    comments         = models.TextField(max_length=100, default='None', blank=True)
     # added by

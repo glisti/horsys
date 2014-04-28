@@ -1,0 +1,9 @@
+Dear manager,
+
+"{{user}}" is trying to join Horsys.
+Navigate to the admin site and accept the Registration Profile to allow
+them access to the site:
+
+http://{{site.domain}}/admin/registration/registrationprofile/{{profile.id}}
+
+{% include 'registration/email_footer.txt' %}
