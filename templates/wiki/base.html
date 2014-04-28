@@ -9,5 +9,6 @@
 	<li {% block horses %}{% endblock %}><a href="{% url "horse_list" %}">Horses</a></li>
         <li {% block schedule %}{% endblock %}><a href="{% url "schedule_home" %}">Schedule</a></li>
         <li {% block customers %}{% endblock %}><a href="{% url "boarder_list" %}">Customers</a></li>
+	<li {% block help %}{% endblock %}><a href="{% url "wiki:root" %}">Help</a></li>
 </ul>
 {% endblock %}
