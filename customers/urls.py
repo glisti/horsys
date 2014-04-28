@@ -7,7 +7,7 @@ from customers.views import *#BoardersList, BoardersCreate, BoardersDetail \
                             #,OwnerContactInfoDelete, OwnerContactInfoUpdate
 urlpatterns = patterns('',
     #Boarder
-    url(r'^$', TemplateView.as_view(template_name='customers\customer_list.html'), name='customer_list'),
+    url(r'^$', TemplateView.as_view(template_name='customers/customer_list.html'), name='customer_list'),
     url(r'^boarders/$', BoardersList.as_view(), name='boarder_list'),
     url(r'^boarders/add/$', BoardersCreate.as_view(), name='boarder_create'),
     url(r'^boarders/(?P<pk>\d+)/$', BoardersDetail.as_view(), name='boarder_detail'),
