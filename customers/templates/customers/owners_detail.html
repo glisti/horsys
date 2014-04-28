@@ -1,0 +1,51 @@
+{% extends 'horse_base.html' %}
+{% block title %}{{ owners.boarder_name }}{% endblock title %}
+{% block content %}
+<div class="pull-right">
+							<a class="btn btn-info btn-sm" href="{% url "owner_update" owners.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url "owner_delete" owners.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+	</div>
+	
+	<h3>
+		Name
+	</h3>
+		{{owners.owner}}
+		<hr>
+	<h3>
+		Vet Preference
+	</h3>
+		<div>
+			{{owners.vet_pref}}
+		</div>
+		<hr>
+	<h3>
+		Farrier Preference
+	</h3>
+		<div>
+			{{owners.Farrier_pref}}
+		</div>	
+		<hr>
+		
+		
+	<h3>Contact Information
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "ownercontactinfo_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                </h3>
+			{% for contact in contacts %}
+			 <table class="table table-bordered table-hover">
+			 	<td></td><td align="right"><a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "ownercontactinfo_update" contact.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+                                <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href="{% url "ownercontactinfo_delete" contact.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+				<tr><td align="center"> Name</td> <td>{{contact.owner_name}}</td> </tr>
+				<tr><td align="center">Address</td> <td>{{contact.address}}</td> </tr>
+				<tr><td align="center">City</td> <td>{{contact.City}}</td> </tr>
+				<tr><td align="center">State</td> <td>{{contact.State}}</td> </tr>
+				<tr><td align="center">Zip Code</td> <td>{{contact.zip_code}}</td> </tr>
+				<tr><td align="center">Country</td> <td>{{contact.country}}</td> </tr>
+				<tr><td align="center">Phone #</td> <td>{{contact.phone_num}}</td> </tr>
+				<tr><td align="center">Email</td> <td>{{contact.email}}</td> </tr>
+			</table>
+              
+                          <td align="center">
+			{% endfor %}
+    </div>
+{% endblock content %}
