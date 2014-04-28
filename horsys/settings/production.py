@@ -19,6 +19,7 @@ DATABASES = {
 INSTALLED_APPS += (
     'horses',
     'schedule',
+    'customers',
     'core',
     'registration',
     'registration.contrib.notification',
