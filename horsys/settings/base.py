@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.sites', # django 1.6.2
     'django.contrib.humanize',
     'south',
+    'stronghold',
     'crispy_forms',
     'django_notify',
     'mptt',
@@ -65,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'horsys.urls'
@@ -124,6 +126,14 @@ MEDIA_URL     = '/media/'
 MEDIA_ROOT    = os.path.join(PROJECT_DIR,'media')
 
 # 3rd Party Settings
+
+STRONGHOLD_DEFAULTS = True
+
+STRONGHOLD_PUBLIC_NAMED_URLS = ('auth_login','auth_logout','password_reset',
+                                'password_reset_confirm','password_reset_complete',
+                                'password_reset_done','registration_activation_complete',
+                                'registration_activate','registration_register',
+                                'registration_disallowed','registration_complete')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
