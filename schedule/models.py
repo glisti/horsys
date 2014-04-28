@@ -6,6 +6,8 @@ from core.models import HorsysBaseModel
 import time
 from datetime import date, datetime, timedelta
 from django.contrib.admin.widgets import AdminDateWidget
+from django.contrib.auth.models import User
+
 
 TIME_CHOICES = (
 	('AM', 'AM'),
@@ -13,7 +15,6 @@ TIME_CHOICES = (
 )
 
 class Shift(HorsysBaseModel):
-	feeder_name   = models.CharField(max_length=100)
 	time_of_day   = models.CharField(max_length=2,choices=TIME_CHOICES,default='AM')
 	turn_out      = models.BooleanField(default=False)
 	refill_water  = models.BooleanField(default=False)
@@ -25,6 +26,7 @@ class Shift(HorsysBaseModel):
 	lights_off    = models.BooleanField(default=False)
 	clock_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
 	clock_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
+	user = models.CharField(max_length=100)
 
 	def __unicode__(self):
 		return self.feeder_name
@@ -37,3 +39,6 @@ class Shift(HorsysBaseModel):
 
 	def title(self):
 		return self.date.isoformat()
+	
+	def get_username(self, request):
+		return request.user.username 
