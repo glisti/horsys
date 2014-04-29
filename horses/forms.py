@@ -4,6 +4,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from crispy_forms.bootstrap import FormActions
 
+from bootstrap3_datetime.widgets import DateTimePicker
+
 from horses.models import Horse, MedicalRecord, Task, Log
 
 form_actions = FormActions(
@@ -46,6 +48,11 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         exclude = ['created','modified']
+        widgets = {
+            'date': DateTimePicker(options={
+                "format": "YYYY-MM-DD H:mm",
+                "pickSeconds": False}),
+        }
 
 class LogForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

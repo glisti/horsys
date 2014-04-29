@@ -27,6 +27,7 @@ INSTALLED_APPS += (
     'core',
     'horses',
     'schedule',
+    'customers',
     'registration',
     'registration.contrib.notification',
 
