@@ -59,7 +59,7 @@ class Task(HorsysBaseModel):
     task      = models.TextField()
     program   = models.CharField(max_length=100)
     completed = models.BooleanField(default=False)
-    # appointmenttime?
+    date      = models.DateTimeField()
     # added by
 
     def get_absolute_url(self):
