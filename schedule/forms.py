@@ -50,8 +50,9 @@ class ShiftPMForm(forms.ModelForm):
         model = Shift
         exclude = ['open_haytrap','time_of_day','created', 'modified', 'user']
         widgets = {
-        '''
-        'log_in': SelectTimeWidget(twelve_hr=True),
-        'log_out': SelectTimeWidget(twelve_hr=True),
-        '''
+        
+        'clock_in': DateTimePicker(options={"format": "YYYY-MM-DD H:mm",
+                                       "pickSeconds": False}),
+        'clock_out': DateTimePicker(options={"format": "YYYY-MM-DD H:mm",
+                                       "pickSeconds": False}),
         }
