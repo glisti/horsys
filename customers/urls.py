@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.base import TemplateView
-from customers.views import *#BoardersList, BoardersCreate, BoardersDetail \
+from customers.views import * #BoardersList, BoardersCreate, BoardersDetail \
                             #,BoardersUpdate, BoardersDelete, OwnersList, OwnersCreate \
                             #,BoardersDetail, OwnersUpdate, OwnersDelete, OwnersDetail \
                             #,ContactInfoCreate, ContactInfoList,OwnerContactInfoCreate, OwnerContactInfoList \
@@ -32,5 +32,18 @@ urlpatterns = patterns('',
     url(r'^owners/contact/(?P<pk>\d+)/$', OwnerContactInfoList.as_view(), name='ownercontactinfo_detail'),
     url(r'^owners/contact/(?P<pk>\d+)/update/$', OwnerContactInfoUpdate.as_view(), name='ownercontactinfo_update'),
     url(r'^owners/contact/(?P<pk>\d+)/delete/$', OwnerContactInfoDelete.as_view(), name='ownercontactinfo_delete'),
+
+    #Docs
+    url(r'^checks/add/$', ChecksPaidCreate.as_view(), name='checkspaid_create'),
+    url(r'^checks/(?P<pk>\d+)/update/$', ChecksPaidUpdate.as_view(), name='checkspaid_update'),
+    url(r'^checks/(?P<pk>\d+)/delete/$', ChecksPaidDelete.as_view(), name='checkspaid_delete'),
+
+    url(r'^waiver/add/$', ChecksPaidCreate.as_view(), name='liabilitywaiver_create'),
+    url(r'^waiver/(?P<pk>\d+)/update/$', ChecksPaidUpdate.as_view(), name='liabilitywaiver_update'),
+    url(r'^waiver/(?P<pk>\d+)/delete/$', ChecksPaidDelete.as_view(), name='liabilitywaiver_delete'),
+
+    url(r'^agreement/add/$', ChecksPaidCreate.as_view(), name='boarderagreement_create'),
+    url(r'^agreement/(?P<pk>\d+)/update/$', ChecksPaidUpdate.as_view(), name='boarderagreement_update'),
+    url(r'^agreement/(?P<pk>\d+)/delete/$', ChecksPaidDelete.as_view(), name='boarderagreement_delete'),
 
 )

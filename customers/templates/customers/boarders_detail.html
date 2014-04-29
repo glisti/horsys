@@ -1,5 +1,6 @@
 {% extends 'horse_base.html' %}
-{% block title %}{{ boarders.boarder_name }}{% endblock title %}
+{% block title %}{{ boarders.boarder }}{% endblock title %}
+{% load tz %}
 {% block content %}
     <div class="pull-right">
 							<a class="btn btn-info btn-sm" href="{% url "boarders_update" boarders.id %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
@@ -9,31 +10,133 @@
 		Name
 	</h3>
 		{{boarders.boarder}}
-	<h3>
+	
+	<hr>
+		 <div id="checkspaid">
+                <div class="page-header">
+                    <h3>Checks Paid
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "checkspaid_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                    </h3>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Check</th>
+                            <th>Added</th>
+                            <th>Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for check in checks_paid %}
+                        <tr>
+                            <td>{{check.title}}</td>
+                            <td>{{check.created|timezone:'America/Chicago'}}</td>
+                            <td>{{check.modified|timezone:'America/Chicago'}}</td>
+                            <td align="center">
+                                <small>
+                                <a class="btn btn-default btn-xs" data-toggle="tooltip" title="view" href="{{check.form.url}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp
+                                <a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "checkspaid_update" check.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+                                <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href="{% url "checkspaid_delete" check.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                                </small>
+                            </td>
+                        </tr>
+                {% empty %}
+                        <tr>
+                            <td colspan="4"><em>{{boarders.boarder}} has no checks.</em></td>
+                        </tr>
+                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 		<hr>
-		Checks Paid
-	</h3>
+
 		<hr>
-		<div>
-			{{boarders.checks_paid}}
-		</div>
-	<h3>
+		       <div id="liabilitywaivers">
+                <div class="page-header">
+                    <h3>Liability Waivers
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "checkspaid_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                    </h3>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Waiver</th>
+                            <th>Added</th>
+                            <th>Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for waiver in liab_waivers %}
+                        <tr>
+                            <td>{{check.title}}</td>
+                            <td>{{check.created|timezone:'America/Chicago'}}</td>
+                            <td>{{check.modified|timezone:'America/Chicago'}}</td>
+                            <td align="center">
+                                <small>
+                                <a class="btn btn-default btn-xs" data-toggle="tooltip" title="view" href="{{waiver.form.url}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp
+                                <a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "liabilitywaivers_update" waiver.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+                                <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href="{% url "liabilitywaivers_delete" waiver.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                                </small>
+                            </td>
+                        </tr>
+                {% empty %}
+                        <tr>
+                            <td colspan="4"><em>{{boarders.boarder}} has no waivers.</em></td>
+                        </tr>
+                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 		<hr>
-		Liability Waivers
-	</h3>
-		<hr>
-		<div>
-			{{boarders.liab_waivers}}
-		</div>	
-		
-		<hr>
+
+        <hr>
+               <div id="boarderagreements">
+                <div class="page-header">
+                    <h3>Boarder Agreements
+                        <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "boarderagreement_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
+                    </h3>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Agreement</th>
+                            <th>Added</th>
+                            <th>Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {% for agreement in boarder_agreements %}
+                        <tr>
+                            <td>{{agreement.title}}</td>
+                            <td>{{agreement.created|timezone:'America/Chicago'}}</td>
+                            <td>{{agreement.modified|timezone:'America/Chicago'}}</td>
+                            <td align="center">
+                                <small>
+                                <a class="btn btn-default btn-xs" data-toggle="tooltip" title="view" href="{{agreement.form.url}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp
+                                <a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "boarderagreement_update" agreement.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+                                <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href="{% url "boarderagreement_delete" agreement.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                                </small>
+                            </td>
+                        </tr>
+                {% empty %}
+                        <tr>
+                            <td colspan="4"><em>{{boarders.boarder}} has no agreements.</em></td>
+                        </tr>
+                {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        <hr>
 	<h3>Contact Information
                         <div class="pull-right"><a class="btn btn-primary btn-sm" href="{% url "contactinfo_create"  %}"><span class="glyphicon glyphicon-plus"></span> Add</a></div>
                 </h3>
 			{% for contact in contacts %}
-			<small>
+			
 			 <table class="table table-bordered table-hover">
-			 	<td><a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "contactinfo_update" contact.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
+			 	<td></td><td align="right"><a class="btn btn-info btn-xs" data-toggle="tooltip" title="edit" href="{% url "contactinfo_update" contact.id %}"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp
                                 <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="delete" href="{% url "contactinfo_delete" contact.id %}"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>
 				<tr><th align="left"> Name</th> <td>{{contact.boarder_name}}</td> </tr>
@@ -45,7 +148,7 @@
 				<tr><th align="left">Phone #</th> <td>{{contact.phone_num}}</td> </tr>
 				<tr><th align="left">Email</th> <td>{{contact.email}}</td> <td></tr>
 			</table>
-              </small>
+              
                           <td align="center">
 			{% endfor %}
     </div>
