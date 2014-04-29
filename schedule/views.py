@@ -24,7 +24,7 @@ class ShiftAMCreate(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.time_of_day = 'AM'
-        form.instance.user = self.request.user.username
+        form.instance.user = self.request.user
         return super(ShiftAMCreate, self).form_valid(form)
 
 class ShiftPMCreate(SuccessMessageMixin, CreateView):
@@ -41,7 +41,7 @@ class ShiftPMCreate(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.time_of_day = 'PM'
-        form.instance.user = self.request.user.username
+        form.instance.user = self.request.user
         return super(ShiftPMCreate, self).form_valid(form)
 
 class ShiftDetail(DetailView):

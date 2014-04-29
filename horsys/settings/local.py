@@ -29,7 +29,7 @@ INSTALLED_APPS += (
     'schedule',
     'registration',
     'registration.contrib.notification',
-
+    'bootstrap3_datetime',
     'debug_toolbar',
     'autofixture',
     'dev',

@@ -24,9 +24,9 @@ class Shift(HorsysBaseModel):
 	clean_stalls  = models.BooleanField(default=False)
 	tidy_barn     = models.BooleanField(default=False)
 	lights_off    = models.BooleanField(default=False)
-	clock_in = models.TimeField(default=datetime.now()- timedelta(hours=5))
-	clock_out = models.TimeField(default=datetime.now()- timedelta(hours=5))
-	user = models.CharField(max_length=100)
+	clock_in = models.DateTimeField()
+	clock_out = models.DateTimeField()
+	user = models.ForeignKey(User)
 
 	def __unicode__(self):
 		return self.feeder_name
@@ -40,5 +40,7 @@ class Shift(HorsysBaseModel):
 	def title(self):
 		return self.date.isoformat()
 	
-	def get_username(self, request):
-		return request.user.username 
+	def total_hours(self):
+		diff = self.clock_out - self.clock_in
+		return round(float(diff.seconds)/float(3600),2)
+

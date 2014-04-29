@@ -5,11 +5,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from crispy_forms.bootstrap import FormActions
 from django.forms import extras
-from schedule.models import Shift#, Clock
+from schedule.models import Shift
 
 from select_time_widget import SelectTimeWidget
 import time
 from datetime import date, datetime, timedelta
+from bootstrap3_datetime.widgets import DateTimePicker
 
 form_actions = FormActions(
     Submit('save_changes', 'Save'),
@@ -28,9 +29,14 @@ class ShiftAMForm(forms.ModelForm):
         model = Shift
         exclude = ['open_haytrap','time_of_day','lights_off','created','modified', 'user']
         widgets = {
-        'clock_in': SelectTimeWidget(twelve_hr=True),
-        'clock_out': SelectTimeWidget(twelve_hr=True),
+        
+        'clock_in': DateTimePicker(options={"format": "YYYY-MM-DD H:mm",
+                                       "pickSeconds": False}),
+        'clock_out': DateTimePicker(options={"format": "YYYY-MM-DD H:mm",
+                                       "pickSeconds": False}),
+        
         }
+        
 
 class ShiftPMForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -44,6 +50,8 @@ class ShiftPMForm(forms.ModelForm):
         model = Shift
         exclude = ['open_haytrap','time_of_day','created', 'modified', 'user']
         widgets = {
+        '''
         'log_in': SelectTimeWidget(twelve_hr=True),
         'log_out': SelectTimeWidget(twelve_hr=True),
+        '''
         }
