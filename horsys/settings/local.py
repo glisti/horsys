@@ -31,7 +31,7 @@ INSTALLED_APPS += (
 
     'registration',
     'registration.contrib.notification',
-
+    'bootstrap3_datetime',
     'debug_toolbar',
     'autofixture',
     'dev',

@@ -23,6 +23,7 @@ INSTALLED_APPS += (
     'core',
     'registration',
     'registration.contrib.notification',
+    'bootstrap3_datetime'
 )
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
