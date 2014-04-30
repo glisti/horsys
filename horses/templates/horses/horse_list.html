@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1>Horses Home
+                <h1>Registered Horses
                     <div class="pull-right">
                         <a class="btn btn-primary btn-sm" href="{% url "horse_create" %}"><span class="glyphicon glyphicon-plus"></span> Add Horse</a>
                     </div>
@@ -75,8 +75,8 @@
                             {% endif %}
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading">{{horse.name}}</h4>
-                                {{horse.description}}
+                                <h4 class="media-heading"><a href="{{horse.get_absolute_url}}">{{horse.name}}</a></h4>
+                                {{horse.description|truncatewords:50}}
                             </div>
                         </li>
                     </ul>
@@ -90,7 +90,7 @@
                     {% if task.completed %}
                         <div class="alert alert-success"><strong>{{task.horse.name}}</strong> completed this task as of {{task.modified|timezone:'America/Chicago'}}</div>
                     {% else %}
-                        <div class="alert alert-danger"><strong>{{task.horse.name}}</strong> needs to complete this task.</div>
+                        <div class="alert alert-danger"><strong><a class="alert-link" href="{{task.horse.get_absolute_url}}">{{task.horse.name}}</a></strong> needs to complete this task.</div>
                     {% endif %}
                     <h3>
                         {{task.created|timezone:'America/Chicago'}}
@@ -100,13 +100,15 @@
                             <a class="btn btn-danger btn-sm" href="{% url "task_delete" task.id %}"><span class="glyphicon glyphicon-remove"></span> Remove</a>
                         </div>
                     </h3>
+                    <h3>Date</h3>
+                    <p>{{task.date|timezone:'America/Chicago'}}</p>
                     <h3>Program</h3>
                     <p>{{task.program}}</p>
                     <h3>Task</h3>
                     <p>{{task.task}}</p>
                     <hr/>
                 {% empty %}
-                    <p><em>{{horse.name}} has no tasks.</em></p>
+                    <p><em>There are 0 tasks to outstanding.</em></p>
                 {% endfor %}
                 </div>
             </div>

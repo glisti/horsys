@@ -28,9 +28,11 @@ INSTALLED_APPS += (
     'horses',
     'schedule',
     'customers',
+    'dashboard',
+
     'registration',
     'registration.contrib.notification',
-
+    'bootstrap3_datetime',
     'debug_toolbar',
     'autofixture',
     'dev',
