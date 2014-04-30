@@ -21,6 +21,8 @@
                 <div class="alert alert-danger"><strong>{{task.horse.name}}</strong> needs to complete this task.</div>
             {% endif %}
             <!--<p>- <small><em>Added: {{task.created|timezone:'America/Chicago'}}</em></small></p>-->
+            <h3>Date</h3>
+            <p>{{task.date|timezone:'America/Chicago'}}</p>
             <h3>Program</h3>
             <p>{{task.program}}</p>
             <h3>Task</h3>

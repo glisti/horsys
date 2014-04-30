@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
 from crispy_forms.bootstrap import FormActions
 
-from dashboard.models import Message
+from dashboard.models import DashboardMessage
 
 form_actions = FormActions(
     Submit('save_changes', 'Save'),
@@ -13,12 +13,12 @@ form_actions = FormActions(
 
 class DashboardMessageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(HorseForm, self).__init__(*args, **kwargs)
+        super(DashboardMessageForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
         self.helper.form_action = ''
         self.helper.form_class  = 'well form-vertical'
         self.helper.layout.append(form_actions)
     class Meta:
-        model = Horse
+        model = DashboardMessage
         exclude = ['created','modified']

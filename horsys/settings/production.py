@@ -21,6 +21,7 @@ INSTALLED_APPS += (
     'schedule',
     'customers',
     'core',
+    'dashboard',
     'registration',
     'registration.contrib.notification',
     'bootstrap3_datetime'

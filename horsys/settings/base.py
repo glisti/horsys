@@ -135,6 +135,9 @@ STRONGHOLD_PUBLIC_NAMED_URLS = ('auth_login','auth_logout','password_reset',
                                 'registration_activate','registration_register',
                                 'registration_disallowed','registration_complete')
 
+REGISTRATION_SUPPLEMENT_CLASS = None
+ACCOUNT_ACTIVATION_DAYS       = 7
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 from django.contrib.messages import constants as messages
