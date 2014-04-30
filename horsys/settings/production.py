@@ -1,5 +1,9 @@
 from .base import *
 
+import sys
+
+sys.path.append("/opt/bitnami/python/lib/python2.7/site-packages/")
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -32,11 +36,12 @@ INSTALLED_APPS += (
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
-STATIC_ROOT = ''
+# Static asset configurationa
+MEDIA_ROOT = '/django/horsys/media/'
+STATIC_ROOT = '/django/horsys/static/'
 STATIC_URL = '/static/'
 
-ROOT_PATH = os.path.join(os.path.dirname(__file__), '..')  # up one level from settings.py
+ROOT_PATH = os.path.join(os.path.dirname(BASE_DIR), '.')  # up one level from settings.py
 STATICFILES_DIRS = (
     os.path.abspath(os.path.join(ROOT_PATH, 'static')), # static is on root level
 )
